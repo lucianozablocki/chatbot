@@ -68,15 +68,13 @@ def Autocorrector (preguntas): #Recibe una matriz, es para corregir la matriz de
     for i in range(preguntas.shape[0]):
         words = word_tokenize(preguntas[i][1])
         # print(words)
-        oracion = ''
-
-        for w in words:
-            mispelled = spell.unknown(words)
-            # print("LO INCORRECTO ES: ",mispelled)
-            for word in mispelled:
-                # print("Quiero corregir: ",word)
-                corregida = spell.correction(word)
-                preguntas[i][1] = preguntas[i][1].replace(word,corregida)
+        
+        mispelled = spell.unknown(words)
+        # print("LO INCORRECTO ES: ",mispelled)
+        for word in mispelled:
+            # print("Quiero corregir: ",word)
+            corregida = spell.correction(word)
+            preguntas[i][1] = preguntas[i][1].replace(word,corregida)
 
     return (preguntas)
 
@@ -98,10 +96,12 @@ def preprocesar(preguntas):
     # preguntas = Stemmizar(preguntas) <--- Descomentar esto, y comentar el Lematizador
     return (preguntas)
 
-    print(preguntas)
 
 preguntas = pn.read_csv("pregTest.csv",header=None)
 preg = preguntas.values
 print(preg)
-preprocesadas = preprocesar(preg)
-print(preprocesadas)
+# preprocesadas = preprocesar(preg)
+# print(preprocesadas)
+
+lematizadas = Lematizar(preg)
+print(lematizadas)
