@@ -5,22 +5,30 @@ import numpy as np
 import nltk
 from nltk.stem.snowball import SnowballStemmer
 from spellchecker import SpellChecker
+import spacy
 
-
+nlp = spacy.load('es_core_news_sm')
 stoplist = stopwords.words('spanish')
 spanishStem=SnowballStemmer('spanish')
 spell = SpellChecker(language='es')
 
-# print(spanishStem.stem('legalmente'))
+def Lematizar(preguntas): #Recibo matriz de preguntas/respuestas
+    for i in range(preguntas.shape[0]):
+        oracion = ''
+        for token in nlp(preguntas[i][1]):
+            oracion = oracion + token.lemma_ + ' '
+            # print(token.text, token.lemma_, token.pos_)
+        preguntas[i][1] = oracion
+    return (preguntas)
 
+def LematizarOracion(sentence): #Recibo string
+    oracion = ''
+    for token in nlp(sentence):
+        oracion = oracion + token.lemma_ + ' '
+    return (oracion)
 
-
-# preguntas = pn.read_csv("pregTest.csv",header=None)
-# preg = preguntas.values
-# print(preg)
 
 def limpiarSignos(preguntas):
-    text = []
     for i in range(preguntas.shape[0]):
 
         aux = preguntas[i][1].replace('"', '') #Borro las comillas
@@ -78,30 +86,22 @@ def AutocorrectorInput (sentence): #Corrije de a una lista de palabras (como par
     # print(mispelled)
     for word in mispelled: #Corrijo cada una, y la reemplazo en la lista
         corregida = spell.correction(word)
-        # print("Corregi algo:",corregida)
         sentence = [corregida if x==word else x for x in sentence]
-        # print(sentence)
- 
-        # sentence = sentence.replace(word,corregida)
-
     return(sentence)
 
-text = []
 def preprocesar(preguntas):
 
+    preguntas = Lematizar(preguntas)
     preguntas = limpiarSignos(preguntas)
-    preguntas = quitarStopwords(preguntas) #NOTAR! Los brackets quedan como:    < carrera >
+    preguntas = quitarStopwords(preguntas) #(!) IMPORTANTE! Los brackets quedan como: < carrera >
     preguntas = Autocorrector(preguntas)
-    # print("LO CORREGIDO ES: ",preguntas)
-    preguntas = Stemmizar(preguntas)
+    # preguntas = Stemmizar(preguntas) <--- Descomentar esto, y comentar el Lematizador
+    return (preguntas)
 
-    # print(preguntas)
+    print(preguntas)
 
-
-# preprocesar(preg)
-sentenceTest  = ['holax','coomo','estass']
-print(sentenceTest)
-print(AutocorrectorInput(sentenceTest))
-# nltk.download()
-
-# nltk.stem.snowball.demo()
+preguntas = pn.read_csv("pregTest.csv",header=None)
+preg = preguntas.values
+print(preg)
+preprocesadas = preprocesar(preg)
+print(preprocesadas)
