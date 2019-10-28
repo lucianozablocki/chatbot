@@ -64,7 +64,7 @@ def remove_stopwords(preguntas, stopwords):
         resultwords  = [word for word in sentencewords if word.lower() not in stopwords] #de las palabras que haya en sentenceword, devolveme las que no esten en stopwords
         result = ' '.join(resultwords) #une la lista que se genero antes (sin las stopwords)
         resultado.append(result)
-        resultado.append("\n")
+        #resultado.append("\n")
     return resultado
 
 def Stemmizar (preguntas):
@@ -100,7 +100,7 @@ def AutocorrectorInput (sentence): #Corrije de a una lista de palabras (como par
         sentence = [corregida if x==word else x for x in sentence]
     return(sentence)
 
-def preprocesar(preguntas):
+def preprocesar(preguntas): 
 
     preguntas = Lematizar(preguntas)
     preguntas = limpiarSignos(preguntas)
@@ -111,11 +111,15 @@ def preprocesar(preguntas):
     return (preguntas)
 
 
-preguntas = pn.read_csv("pregTest.csv",header=None)
-preg = preguntas.values
-print(preg)
-preprocesadas = preprocesar(preg)
-print(preprocesadas)
+if __name__ == "__main__": #modificar metodos para devolver preguntas preprocesadas en formato esperado: lista
+                            #de preguntas separadas por coma -> ["como estudio","vivo en extranjero","como dar de baja"]
+    preguntas = pn.read_csv("pregTest.csv",header=None)
+    print(preguntas.shape)
+    print(preguntas)
+    preg = preguntas.values
+    print(preg[:][1])
+    preprocesadas = preprocesar(preg)
+    print(preprocesadas)
 
-#lematizadas = Lematizar(preg)
-#print(lematizadas)
+    #lematizadas = Lematizar(preg)
+    #print(lematizadas)
