@@ -54,6 +54,19 @@ def quitarStopwords(preguntas):
         preguntas[i][1] = oracion #Dejo en la matriz la oracion limpia
     return (preguntas)
 
+#metodo que elimina las stopwords de un comentario
+def remove_stopwords(preguntas, stopwords):
+    n=preguntas.shape[0]
+    resultado=[]
+    for i in range(n):
+        sentence = preguntas[i][1]        
+        sentencewords = sentence.split() #divide el comentario en una lista de palabras
+        resultwords  = [word for word in sentencewords if word.lower() not in stopwords] #de las palabras que haya en sentenceword, devolveme las que no esten en stopwords
+        result = ' '.join(resultwords) #une la lista que se genero antes (sin las stopwords)
+        resultado.append(result)
+        resultado.append("\n")
+    return resultado
+
 def Stemmizar (preguntas):
    for i in range(preguntas.shape[0]):
        words = word_tokenize(preguntas[i][1])
@@ -91,6 +104,7 @@ def preprocesar(preguntas):
 
     preguntas = Lematizar(preguntas)
     preguntas = limpiarSignos(preguntas)
+    #preguntas_otras = remove_stopwords(preguntas,stoplist)
     preguntas = quitarStopwords(preguntas) #(!) IMPORTANTE! Los brackets quedan como: < carrera >
     preguntas = Autocorrector(preguntas)
     # preguntas = Stemmizar(preguntas) <--- Descomentar esto, y comentar el Lematizador
@@ -100,8 +114,8 @@ def preprocesar(preguntas):
 preguntas = pn.read_csv("pregTest.csv",header=None)
 preg = preguntas.values
 print(preg)
-# preprocesadas = preprocesar(preg)
-# print(preprocesadas)
+preprocesadas = preprocesar(preg)
+print(preprocesadas)
 
-lematizadas = Lematizar(preg)
-print(lematizadas)
+#lematizadas = Lematizar(preg)
+#print(lematizadas)
