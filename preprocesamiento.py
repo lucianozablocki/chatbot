@@ -32,14 +32,17 @@ def limpiarSignos(preguntas):
     for i in range(preguntas.shape[0]):
 
         aux = preguntas[i][1].replace('"', '') #Borro las comillas
-        aux = aux.replace('?','') #Borro signos de preguntas
+        aux = aux.replace('?','') #Borro signos de preguntas...
         aux = aux.replace('¿','')
+        aux = aux.replace('!','')#.. y signos de exclamacion
+        aux = aux.replace('¡','')
         aux = aux.replace(',','') #Borro comas
         aux = aux.replace('á','a') #Reemplazo signos de puntuación...
         aux = aux.replace('é','e')
         aux = aux.replace('í','i')
         aux = aux.replace('ó','o')
         aux = aux.replace('ú','u')
+        aux = aux.lower() #Llevo todo a minuscula
         preguntas[i][1] = aux
     return (preguntas)
 
@@ -110,14 +113,13 @@ def preprocesar(preguntas):
     # preguntas = Stemmizar(preguntas) <--- Descomentar esto, y comentar el Lematizador
     return (preguntas)
 
-
 if __name__ == "__main__": #modificar metodos para devolver preguntas preprocesadas en formato esperado: lista
                             #de preguntas separadas por coma -> ["como estudio","vivo en extranjero","como dar de baja"]
     preguntas = pn.read_csv("pregTest.csv",header=None)
     print(preguntas.shape)
     print(preguntas)
     preg = preguntas.values
-    print(preg[:][1])
+    # print(preg[:][1])
     preprocesadas = preprocesar(preg)
     print(preprocesadas)
 
