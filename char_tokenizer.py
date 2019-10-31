@@ -1,5 +1,6 @@
 #import torch as tr
 import numpy as np
+import pandas
 #CHAR_CHANNELS = 55
 
 class CharTokenizer():
@@ -15,7 +16,7 @@ class CharTokenizer():
                                                             #(palabra) le aplico str2tns
 
     def str2tns(self, comm): #comm es una palabra
-        return (list(map(self.char2idx, comm))) #a cada elemento de la palabra 
+        return (list((map(self.char2idx, comm)))) #a cada elemento de la palabra 
                                                 #(caracter) le aplico char2idx
 
     def char2idx(self, c): #c es un caracter
@@ -36,3 +37,11 @@ class CharTokenizer():
             'a' : 54, 'b' : 55, 'c' : 56, 'd' : 57, 'e' : 58, 'f' : 59, 'g' : 60, 'h' : 61, 'i' : 62,
             'j' : 63, 'k' : 64, 'l' : 65, 'm' : 66, 'n' : 67, 'o' : 68, 'p' : 69, 'q' : 70, 'r' : 71,
             's' : 72, 't' : 73, 'u' : 74, 'v' : 75, 'w' : 76, 'x' : 77, 'y' : 78, 'z' : 79}
+
+if __name__=='__main__':
+    dataset = pandas.read_csv("pregTest.csv",header=None,delimiter=',')
+    x_text = dataset.values[:,1]
+    char_lvl = CharTokenizer()
+    for sentence in x_text:
+        print(char_lvl.tokenize(sentence))
+        print(len(char_lvl.tokenize(sentence)))
