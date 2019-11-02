@@ -15,16 +15,18 @@ class BOW():
                 vectorizer = TfidfVectorizer(strip_accents=strip_accents,stop_words=stoplist,ngram_range=ngram) 
             else:
                 vectorizer = TfidfVectorizer(strip_accents=strip_accents,stop_words=stoplist)   
-            X = vectorizer.fit_transform(x_text_lem)
         else:
             if ngram:
                 vectorizer = CountVectorizer(strip_accents=strip_accents,stop_words=stoplist,ngram_range=ngram)     
             else: 
                 vectorizer = CountVectorizer(strip_accents=strip_accents,stop_words=stoplist)
-            X = vectorizer.fit_transform(x_text_lem)  
+        X = vectorizer.fit_transform(x_text_lem)  
 
         self.vectorizer = vectorizer
         self.X = X
+
+    def get_vocab(self):
+        return(self.vectorizer.get_feature_names())
 
 if __name__=='__main__':
     stoplist = stopwords.words('spanish')
@@ -33,5 +35,5 @@ if __name__=='__main__':
     y = dataset.values[:,0]
     print(y)
     bow_train = BOW(dataset,'ascii',stoplist,False)
-    print(bow_train.vectorizer.get_feature_names())
+    print(bow_train.get_vocab())
     print(bow_train.X.shape)
