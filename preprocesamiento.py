@@ -103,14 +103,16 @@ def AutocorrectorInput (sentence): #Corrije de a una lista de palabras (como par
         sentence = [corregida if x==word else x for x in sentence]
     return(sentence)
 
-def preprocesar(preguntas): 
+def preprocesar(preguntas,tipo): 
 
-    preguntas = Lematizar(preguntas)
+    if tipo==1:
+        preguntas = Lematizar(preguntas)
     preguntas = limpiarSignos(preguntas)
     #preguntas_otras = remove_stopwords(preguntas,stoplist)
     preguntas = quitarStopwords(preguntas) #(!) IMPORTANTE! Los brackets quedan como: < carrera >
     preguntas = Autocorrector(preguntas)
-    # preguntas = Stemmizar(preguntas) <--- Descomentar esto, y comentar el Lematizador
+    if tipo==2:
+        preguntas = Stemmizar(preguntas) #<--- Descomentar esto, y comentar el Lematizador
     return (preguntas)
 
 if __name__ == "__main__": #modificar metodos para devolver preguntas preprocesadas en formato esperado: lista
