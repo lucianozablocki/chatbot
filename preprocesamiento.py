@@ -6,6 +6,7 @@ import nltk
 from nltk.stem.snowball import SnowballStemmer
 from spellchecker import SpellChecker
 import spacy
+import time
 
 nlp = spacy.load('es_core_news_sm')
 stoplist = stopwords.words('spanish')
@@ -13,12 +14,14 @@ spanishStem=SnowballStemmer('spanish')
 spell = SpellChecker(language='es')
 
 def Lematizar(preguntas): #Recibo matriz de preguntas/respuestas
+    t = time.time()
     for i in range(preguntas.shape[0]):
         oracion = ''
         for token in nlp(preguntas[i][1]):
             oracion = oracion + token.lemma_ + ' '
             # print(token.text, token.lemma_, token.pos_)
         preguntas[i][1] = oracion
+    print('Elapsed in lematizar: ' ,(time.time() - t))
     return (preguntas)
 
 def LematizarOracion(sentence): #Recibo string
@@ -29,6 +32,7 @@ def LematizarOracion(sentence): #Recibo string
 
 
 def limpiarSignos(preguntas):
+    t = time.time()
     for i in range(preguntas.shape[0]):
 
         aux = preguntas[i][1].replace('"', '') #Borro las comillas
@@ -44,9 +48,11 @@ def limpiarSignos(preguntas):
         aux = aux.replace('ú','u')
         aux = aux.lower() #Llevo todo a minuscula
         preguntas[i][1] = aux
+    print('Elapsed in limpiarsignos: ' ,(time.time() - t))
     return (preguntas)
 
 def quitarStopwords(preguntas):
+    t = time.time()
     for i in range(preguntas.shape[0]): #Para todas las oraciones...
         words = word_tokenize(preguntas[i][1]) #Separo en palabras
         oracion = '' #Vacio el vector de palabras de la oracion actual
@@ -55,6 +61,7 @@ def quitarStopwords(preguntas):
                 oracion = oracion + w + ' '
 
         preguntas[i][1] = oracion #Dejo en la matriz la oracion limpia
+    print('Elapsed in quitarstopwords: ' ,(time.time() - t))    
     return (preguntas)
 
 #metodo que elimina las stopwords de un comentario
@@ -81,6 +88,7 @@ def Stemmizar (preguntas):
    return(preguntas)
 
 def Autocorrector (preguntas): #Recibe una matriz, es para corregir la matriz de preguntas
+    t =time.time()
     for i in range(preguntas.shape[0]):
         words = word_tokenize(preguntas[i][1])
         # print(words)
@@ -91,7 +99,7 @@ def Autocorrector (preguntas): #Recibe una matriz, es para corregir la matriz de
             # print("Quiero corregir: ",word)
             corregida = spell.correction(word)
             preguntas[i][1] = preguntas[i][1].replace(word,corregida)
-
+    print('Elapsed in autocorrector: ' ,(time.time() - t))
     return (preguntas)
 
 def AutocorrectorInput (sentence): #Corrije de a una lista de palabras (como para usar en la entrada del usuario)
@@ -106,24 +114,36 @@ def AutocorrectorInput (sentence): #Corrije de a una lista de palabras (como par
 def preprocesar(preguntas,tipo): 
 
     if tipo==1:
+        print("---init lemmatization---")
         preguntas = Lematizar(preguntas)
+        print("---finished lemmatization--")
+    print("---init limpiarSignos---")
     preguntas = limpiarSignos(preguntas)
+    print("---finished limpiarSignos---")
     #preguntas_otras = remove_stopwords(preguntas,stoplist)
+    print("---init quitarStopwords---")
     preguntas = quitarStopwords(preguntas) #(!) IMPORTANTE! Los brackets quedan como: < carrera >
+    print("---finished quitarStopwords---")
+    print("---init autocorrector---")
     preguntas = Autocorrector(preguntas)
+    print("hola")
+    print("---finished autocorrector---")
     if tipo==2:
+        print("---init stemming---")
         preguntas = Stemmizar(preguntas) #<--- Descomentar esto, y comentar el Lematizador
+        print("---finished stemming---")
+    
     return (preguntas)
 
 if __name__ == "__main__": #modificar metodos para devolver preguntas preprocesadas en formato esperado: lista
                             #de preguntas separadas por coma -> ["como estudio","vivo en extranjero","como dar de baja"]
     preguntas = pn.read_csv("pregTest.csv",header=None)
-    print(preguntas.shape)
-    print(preguntas)
+    #print(preguntas.shape)
+    #print(preguntas)
     preg = preguntas.values
     # print(preg[:][1])
-    preprocesadas = preprocesar(preg)
-    print(preprocesadas)
+    preprocesadas = preprocesar(preg,1)
+    #print(preprocesadas)
 
     #lematizadas = Lematizar(preg)
     #print(lematizadas)
