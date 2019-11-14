@@ -3,6 +3,7 @@ from nltk.corpus import stopwords
 import pandas
 import preprocesamiento #los metodos de preprocesamiento.py reciben datos en la forma: data.values donde data
                         #es producto de leer csv con pandas.read_csv
+import torch as tr
 
 class BOW():
     def __init__(self,dataset,strip_accents,stoplist,weighting,ngram = None):
@@ -28,12 +29,20 @@ class BOW():
     def get_vocab(self):
         return(self.vectorizer.get_feature_names())
 
-if __name__=='__main__':
+if __name__ == '__main__':
+    #algo = tr.tensor([[-1, -1], [2, 1]])
+    #print(algo)
+    
     stoplist = stopwords.words('spanish')
-    dataset = pandas.read_csv("pregTest.csv",header=None,delimiter=',')
+    dataset = pandas.read_csv("pregTest.csv",header=None)
     #n_gram = (1,2)
     y = dataset.values[:,0]
     print(y)
-    bow_train = BOW(dataset,'ascii',stoplist,False)
-    print(bow_train.get_vocab())
-    print(bow_train.X.shape)
+    #bow_train_bigram = BOW(dataset,'ascii',stoplist,False,ngram=(2,2))
+    #print(bow_train_bigram.get_vocab())
+    #print(bow_train.X.shape)
+    #print(type(bow_train.X))
+    bow_train_unigram = BOW(dataset,'ascii',stoplist,False)
+    print(bow_train_unigram.get_vocab())
+    print(bow_train_unigram.X.shape)
+    
