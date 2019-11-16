@@ -113,6 +113,7 @@ def AutocorrectorInput (sentence): #Corrije de a una lista de palabras (como par
 
 def preprocesar(preguntas,tipo): 
 
+    preguntas = quitarStopwords(preguntas) #(!) IMPORTANTE! Los brackets quedan como: < carrera >
     if tipo==1:
         print("---init lemmatization---")
         preguntas = Lematizar(preguntas)
@@ -122,12 +123,11 @@ def preprocesar(preguntas,tipo):
     print("---finished limpiarSignos---")
     #preguntas_otras = remove_stopwords(preguntas,stoplist)
     print("---init quitarStopwords---")
-    preguntas = quitarStopwords(preguntas) #(!) IMPORTANTE! Los brackets quedan como: < carrera >
     print("---finished quitarStopwords---")
     print("---init autocorrector---")
-    preguntas = Autocorrector(preguntas)
-    print("hola")
-    print("---finished autocorrector---")
+    # preguntas = Autocorrector(preguntas)
+    # print("hola")
+    # print("---finished autocorrector---")
     if tipo==2:
         print("---init stemming---")
         preguntas = Stemmizar(preguntas) #<--- Descomentar esto, y comentar el Lematizador
@@ -137,13 +137,22 @@ def preprocesar(preguntas,tipo):
 
 if __name__ == "__main__": #modificar metodos para devolver preguntas preprocesadas en formato esperado: lista
                             #de preguntas separadas por coma -> ["como estudio","vivo en extranjero","como dar de baja"]
-    preguntas = pn.read_csv("pregTest.csv",header=None)
-    #print(preguntas.shape)
-    #print(preguntas)
-    preg = preguntas.values
-    # print(preg[:][1])
-    preprocesadas = preprocesar(preg,1)
-    #print(preprocesadas)
+    dataset = pn.read_csv("preguntas.csv",header=None,delimiter=',')
+    labels = dataset.values[:,0]
+    cantidadLabels = dataset.values[len(dataset.values)-1,0] + 1
+    print("Terminé de cargar los datos recién...")
+    # print(labels)
+    ################
+    ################
+    print("Arranco a preprocesar...")
+    correctedData = preprocesar(dataset.values,1) #Dataset lematizado
+    #print(correctedData)
+    ################
+    ################
+    print("Guardando como csv...")
+    df_correctedData = pn.DataFrame(correctedData)
+    df_correctedData.to_csv('preprocessedQuestions.csv', index=False,header=False)
 
-    #lematizadas = Lematizar(preg)
-    #print(lematizadas)
+    dataset = pn.read_csv("preprocessedQuestions.csv",header=None,delimiter=',')
+    print(dataset.shape)
+    
