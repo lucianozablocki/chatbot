@@ -88,21 +88,69 @@ def create_tensor_prom_and_embedding(Xtext,cant_patrones,wordvectors):
     X = X.float()
     return X,tensorEmbedding,wordSet
 
-def separate_dataset(correctedData,cantidad_preg):
+def separate_dataset(correctedData,cantidad_preg,validation=True):
     #Separo el dataset en test y train -> un patron de cada clase al subconjunto de test, el resto a train
     clase_actual = -1
     indxTest = [] #lista de indices de preguntas en subconjunto de test
     indxTrain= [] #lista de indices de preguntas en subconjunto de train
     indxVal = []
+    Xval = None
+    Yval = None
     for i in range(cantidad_preg):
         if correctedData[i,0]!=clase_actual: #cambio de clase
             clase_actual = correctedData[i,0]
             cantidadPregClase = contarClase(correctedData,clase_actual) #cuento cuantas preguntas hay pertenecientes a la clase actual
             if clase_actual!=46 and clase_actual !=103 and clase_actual!=104 and clase_actual !=105: #clases con solo 1 patron no se incluyen en test
                 indxTest.append(np.random.randint(0, cantidadPregClase-1)+i) #tomo un indice al azar por clase y lo agrego al subconjunto de test
-                indxVal.append(np.random.randint(0, cantidadPregClase-1)+i)
+                if validation:
+                    indxVal.append(np.random.randint(0, cantidadPregClase-1)+i)
                 #NO ESTA CONTROLADA LA REPETICION DE INDICES EN TEST Y VAL, ATM SE PUEDEN REPETIR
     #Obtengo los indices de train
     indices = range(cantidad_preg)
     indxTrain = list(filter(lambda x: x not in indxTest and x not in indxVal, indices)) #al no meter clases con un solo patron al indxTest, pasan automaticamente al indxTrain
-    return indxTest,indxTrain,indxVal
+    
+    cant_test = len(indxTest)
+    cant_train = len(indxTrain)
+    if validation: 
+        cant_val = len(indxVal)
+        Yval = np.zeros((cant_val), dtype=np.int64) #clases de los patrones que estan en el subconjunto de validacion
+        Xval = np.zeros((cant_val, 1),  dtype=object)
+    
+    Ytrain = np.zeros((cant_train),dtype=np.int64) #clases de los patrones que estan en el subconjunto de train
+    Xtrain = np.zeros((cant_train, 1),  dtype=object) #opcion p mejorar performance, inicializar como sparse cada matriz X
+    Ytest = np.zeros((cant_test), dtype=np.int64) #clases de los patrones que estan en el subconjunto de test
+    Xtest = np.zeros((cant_test, 1),  dtype=object)
+
+    contTrain = 0
+    contTest = 0
+    contVal = 0
+    for i in range(cantidad_preg):
+        if i in indxTrain:
+            Ytrain[contTrain] = correctedData[i,0]
+            Xtrain[contTrain] = correctedData[i,1]
+            contTrain+=1
+        elif i in indxTest:
+            Ytest[contTest] = correctedData[i,0]
+            Xtest[contTest,:] = correctedData[i,1]
+            contTest+=1
+        if i in indxVal and validation:
+            Yval[contVal] = correctedData[i,0]
+            Xval[contVal,:] = correctedData[i,1]
+            contVal+=1
+
+    Ytrain = torch.from_numpy(Ytrain)
+    print("shape del tensor Ytrain : ",Ytrain.shape)
+    Ytest = torch.from_numpy(Ytest)
+    print("shape del tensor Ytest : ",Ytest.shape)
+    if validation:
+        Yval = torch.from_numpy(Yval)
+        print("shape del tensor Yval : ",Yval.shape)
+        #Xval = torch.from_numpy(Xval)
+        #Xval = Xval.float()
+
+    #Xtrain = torch.from_numpy(Xtrain)
+    #Xtest = torch.from_numpy(Xtest)
+    #Xtrain = Xtrain.float()
+    #Xtest = Xtest.float()
+    
+    return Xtrain,Ytrain,Xtest,Ytest,Xval,Yval
