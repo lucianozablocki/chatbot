@@ -102,6 +102,12 @@ Ytest = torch.from_numpy(Ytest)
 print("shape del tensor Ytest : ",Ytest.shape)
 Yval = torch.from_numpy(Yval)
 print("shape del tensor Yval : ",Yval.shape)
+Xtrain = torch.from_numpy(Xtrain)
+Xtest = torch.from_numpy(Xtest)
+Xval = torch.from_numpy(Xval)
+Xtrain = Xtrain.float()
+Xtest = Xtest.float()
+Xval = Xval.float()
 print("-------------FINISHED CREANDO Ytest, Ytrain, Xtext_test y Xtext_train-------------------\n")
 
 print("-----------------INIT TRAINING PROCESS---------------------")
@@ -111,12 +117,6 @@ H2 = 40
 H3 = 30
 D_out = cantidad_labels
 #Creo el trainset y el testset
-Xtrain = torch.from_numpy(Xtrain)
-Xtest = torch.from_numpy(Xtest)
-Xval = torch.from_numpy(Xval)
-Xtrain = Xtrain.float()
-Xtest = Xtest.float()
-Xval = Xval.float()
 print(Xtrain.shape)
 trainset = torch.utils.data.TensorDataset(Xtrain,Ytrain) 
 testset = torch.utils.data.TensorDataset(Xtest,Ytest)

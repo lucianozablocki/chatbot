@@ -22,7 +22,7 @@ class CharTokenizer():
 
     def char2idx(self, c): #c es un caracter
         idx = 27     
-        print(c)
+        #print(c)
         if c in self.char_set:
             idx = self.char_set[c]
         return idx
