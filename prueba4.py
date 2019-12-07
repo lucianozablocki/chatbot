@@ -5,8 +5,9 @@ import pandas as pn
 from char_tokenizer import CharTokenizer
 import utils
 from sklearn.metrics import balanced_accuracy_score
-
-
+import torch.nn.functional as F
+from utils import EarlyStopping
+from matplotlib import pyplot as plt
 def one_hot_encode(indx, dict_size, maxlen, batch_size):
     # Creating a multi-dimensional array of zeros with the desired output shape
     features = np.zeros((batch_size, maxlen, dict_size), dtype=np.float32)
@@ -18,7 +19,7 @@ def one_hot_encode(indx, dict_size, maxlen, batch_size):
     return features
 
 class sRNN(nn.Module):
-    def __init__(self, input_size, output_size, hidden_dim, n_layers):
+    def __init__(self, input_size, output_size, hidden_dim, n_layers,bidirectional=False):
         super(sRNN, self).__init__()
 
         # Defining some parameters
@@ -27,10 +28,10 @@ class sRNN(nn.Module):
 
         #Defining the layers
         # RNN Layer
-        self.rnn = nn.LSTM(input_size, hidden_dim, n_layers, batch_first=True)   
+        self.rnn = nn.LSTM(input_size, hidden_dim, n_layers, batch_first=True,bidirectional=bidirectional)   
         #self.rnn = nn.RNN(input_size, hidden_dim, n_layers, batch_first=True) 
         # Fully connected layer
-        self.fc = nn.Linear(hidden_dim*169, output_size)
+        self.fc = nn.Linear(hidden_dim*169, output_size) # *2 agregado xq hay el doble de neuronas en bidirectional
         #self.fc2 = nn.Linear(output_size,output_size)
     
     def forward(self, x):
@@ -41,12 +42,13 @@ class sRNN(nn.Module):
         hidden = self.init_hidden(batch_size)
         # Passing in the input and hidden state into the model and obtaining outputs
         #out, hidden = self.rnn(x, hidden)
+        #print("dimensiones del tensor que entra a la rnn: ",x.shape)
         out,_ = self.rnn(x)
         # Reshaping the outputs such that it can be fit into the fully connected layer
         #out = out.contiguous().view(-1, self.hidden_dim)
         #print("shape de out q entra a la fully connected ",out.shape)
         #import ipdb;ipdb.set_trace()
-        print(out.shape)
+        print("dimensiones de lo q sale de la rnn: ",out.shape)
         out = self.fc(out.reshape(-1,out.shape[2]*out.shape[1]))
         #out = self.fc2(out)
         return out, hidden
@@ -56,6 +58,92 @@ class sRNN(nn.Module):
         hidden = torch.zeros(self.n_layers, batch_size, self.hidden_dim).to(device)
          # We'll send the tensor holding the hidden state to the device we specified earlier as well
         return hidden
+
+class CNN(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size,maxlen,n_layers=1):
+        super(CNN, self).__init__()
+        self.input_size = input_size
+        self.hidden_size = hidden_size
+        self.output_size = output_size
+        self.n_layers = n_layers
+
+        self.c1 = nn.Conv1d(input_size, hidden_size, 3,padding=1)
+        self.a1 = nn.ReLU()
+        self.b1 = nn.BatchNorm1d(hidden_size)
+        self.p1 = nn.AvgPool1d(2)
+        
+        self.c2 = nn.Conv1d(hidden_size, hidden_size, 3,padding=1)
+        self.a2 = nn.ReLU()
+        self.b2 = nn.BatchNorm1d(hidden_size)
+        self.p2 = nn.AvgPool1d(2)
+        
+        self.c3 = nn.Conv1d(hidden_size, hidden_size, 3,padding=1)
+        self.a3 = nn.ReLU()
+        self.b3 = nn.BatchNorm1d(hidden_size)
+        self.p3 = nn.AvgPool1d(2)
+        
+        #nn.Sequential(nn.Conv1d(input_size,hidden_size,3),
+        #)
+        #self.gru = nn.GRU(hidden_size, hidden_size, n_layers, dropout=0.01)
+        #self.gru = nn.GRU(input_size,hidden_size,n_layers,dropout=0.01)
+        self.out = nn.Linear(hidden_size*int(maxlen/2**3), output_size)
+
+    def forward(self, inputs, hidden=None):
+        #batch_size = inputs.size(1)
+        batch_size = inputs.size(0)
+        #print("dimensiones del tensor que entra a la cnn: ",inputs.shape)
+        # Turn (seq_len x batch_size x input_size) into (batch_size x input_size x seq_len) for CNN
+        #inputs = inputs.transpose(0, 1).transpose(1, 2)
+
+        #entra un tensor de dimensiones: batch x seq_len x input_size
+        #quiero un tensor dedimensiones: batch x input_size x seq_len
+        inputs = inputs.transpose(1, 2)
+
+        # Run through Conv1d and Pool1d layers
+        c = self.c1(inputs)
+        #print("Paso primera capa")
+        #usar relu y batch norm a la salida 
+        a = self.a1(c)
+        b = self.b1(a)
+        p = self.p1(b)
+        #print("Paso segunda capa")
+        c = self.c2(p)
+        a = self.a2(c)
+        b = self.b2(a)
+        p = self.p2(b)
+        #print("Paso tercera capa")
+        #print("Paso cuarta capa")
+        c = self.c3(p)
+        a = self.a3(c)
+        b = self.b3(a)
+        p = self.p3(b)
+        #print("dimensiones del tensor que sale de la cnn antes de transpose: ",p.shape)
+        
+        # Turn (batch_size x hidden_size x seq_len) back into (seq_len x batch_size x hidden_size) for RNN
+        #p = p.transpose(1, 2).transpose(0, 1)
+        #print("dimensiones del tensor que entra a la gru antes de transpose: ",p.shape)
+        #sale tensor de batch_size x hidden_size x seq_len
+        
+        #quiero tensor de seq_len x batch_size x hidden_size
+        #p = p.transpose(0,1).transpose(0,2)
+        #print("dimensiones del tensor que entra a la gru dsp de transpose: ",p.shape)
+        #p = torch.tanh(p)
+        #output, hidden = self.gru(p, hidden)
+        #print("Paso quinta capa")
+        #print("dimension de lo que sale de la gru ",output.shape)
+        
+        #conv_seq_len = p.shape[2]
+        #p = p.view(-1,conv_seq_len * self.hidden_size) # Treating (conv_seq_len x batch_size) as batch_size for linear layer
+        p = torch.flatten(p,start_dim=1)
+        #output = torch.tanh(self.out(output))
+        #output = self.out(output.reshape(-1,conv_seq_len*self.hidden_size))
+        #output = self.out(output.reshape(conv_seq_len*batch_))
+        output = self.out(p)
+        #print("Paso ultima capa")
+        #print("shape de la salida:",output.shape)
+        
+        #output = output.view(conv_seq_len, -1, self.output_size)
+        return output, hidden
 
 correctedData = pn.read_csv("C:/Users/lucy/chatbot/preprocessedQuestions_lem.csv",delimiter=',',header=None) #comentar esta linea en caso de descomentar la anterior
 cantidad_preg = correctedData.shape[0]
@@ -67,7 +155,7 @@ text = correctedData.values[:,1]
 #labels = np.array(labels,dtype=np.int8)
 # Finding the length of the longest string in our data
 maxlen = len(max(text, key=len))
-print(maxlen)
+#print(maxlen)
 # Padding
 
 # A simple loop that loops through the list of sentences and adds a ' ' whitespace until the length of
@@ -76,22 +164,28 @@ print(maxlen)
 for i in range(len(Xtrain)):
     while len(Xtrain[i,0])<maxlen:
         Xtrain[i,0] += ' ' 
-print(len(Xtest))
+
 for i in range(len(Xtest)):
     while len(Xtest[i,0])<maxlen:
         Xtest[i,0] += ' '
+
+for i in range(len(Xval)):
+    while len(Xval[i,0])<maxlen:
+        Xval[i,0] += ' '
 
 print("llego hasta dsp de llenar con whitespace")
 #print(len(text[0]))
 char = CharTokenizer()
 indxTrain= np.zeros((len(Xtrain),maxlen))
 indxTest = np.zeros((len(Xtest),maxlen))
-
+indxVal = np.zeros((len(Xval),maxlen))
 #indx es una matriz que tiene en cada fila los indices de los caracteres de la oracion, y maxlen columnas
 for i in range(len(Xtrain)):
     indxTrain[i] = char.tokenize(Xtrain[i,0])
 for i in range(len(Xtest)):
     indxTest[i] = char.tokenize(Xtest[i,0])
+for i in range(len(Xval)):
+    indxVal[i] = char.tokenize(Xval[i,0])
 #print(indxTest[0])
 #print(indxTest[60])
 
@@ -101,13 +195,17 @@ dict_size = len(char.char_set)
 #print(dict_size)
 batch_size_train = len(Xtrain)
 batch_size_test = len(Xtest)
+batch_size_val = len(Xval)
 #seq_len = maxlen
 input_seq_train = one_hot_encode(indxTrain,dict_size,maxlen,batch_size_train)
 input_seq_test = one_hot_encode(indxTest,dict_size,maxlen,batch_size_test)
+input_seq_val = one_hot_encode(indxVal,dict_size,maxlen,batch_size_val)
 input_seq_train = torch.from_numpy(input_seq_train)
 input_seq_test = torch.from_numpy(input_seq_test)
+input_seq_val = torch.from_numpy(input_seq_val)
 target_seq_train = Ytrain
 target_seq_test = Ytest
+target_seq_val = Yval
 # torch.cuda.is_available() checks and returns a Boolean True if a GPU is available, else it'll return False
 is_cuda = torch.cuda.is_available()
 
@@ -122,31 +220,53 @@ else:
 cantidad_labels = correctedData.values[len(correctedData.values)-1,0] + 1
 # Instantiate the model with hyperparameters
 #model = sRNN(input_size=dict_size, output_size=cantidad_labels, hidden_dim=12, n_layers=1)
-model = sRNN(input_size=dict_size, output_size=cantidad_labels, hidden_dim=12, n_layers=1,bidirectional=True)
-
+#model = sRNN(input_size=dict_size, output_size=cantidad_labels, hidden_dim=20, n_layers=1,bidirectional=True)
+model = CNN(input_size=dict_size,hidden_size = 20,output_size=cantidad_labels,maxlen=maxlen)
 # We'll also set the model to the device that we defined earlier (default is CPU)
 model = model.to(device)
 
 # Define hyperparameters
-n_epochs = 100
-lr=0.01
+n_epochs = 500
+#lr=0.01
+
+#Creo el trainset y el testset
+trainset = torch.utils.data.TensorDataset(input_seq_train,Ytrain) 
+testset = torch.utils.data.TensorDataset(input_seq_test,Ytest)
+valset = torch.utils.data.TensorDataset(input_seq_val,Yval)
+#Creo el dataloader
+batch_size = 500
+cant_test = batch_size_test
+cant_val = batch_size_val
+trainloader = torch.utils.data.DataLoader(trainset,batch_size=batch_size,shuffle=True) 
+testloader = torch.utils.data.DataLoader(testset,batch_size=cant_test,shuffle=True)
+valloader = torch.utils.data.DataLoader(valset,batch_size=cant_val,shuffle=True)
+patience=10
+early_stopping = EarlyStopping(verbose=True,patience=patience)
+train_losses = [] #vector que guarda el loss para cada epoca
+val_losses = []
+avg_train_losses = []
+avg_val_losses = []
+ejex = []
+
 
 # Define Loss, Optimizer
 criterion = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=lr)
-target_prob_train = np.zeros((len(Xtrain),cantidad_labels))
-for i in range(len(target_seq_train)):
-    target_prob_train[i,target_seq_train[i]] = 1
-target_prob_test = np.zeros((len(Xtest),cantidad_labels))
-for i in range(len(target_seq_test)):
-    target_prob_test[i,target_seq_test[i]] = 1
+#optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+optimizer = torch.optim.Adam(model.parameters())
+#target_prob_train = np.zeros((len(Xtrain),cantidad_labels))
+#for i in range(len(target_seq_train)):
+#    target_prob_train[i,target_seq_train[i]] = 1
+#target_prob_test = np.zeros((len(Xtest),cantidad_labels))
+#for i in range(len(target_seq_test)):
+#    target_prob_test[i,target_seq_test[i]] = 1
 # Training Run
 input_seq_train = input_seq_train.to(device)
-target_prob_train = torch.from_numpy(target_prob_train)
+#target_prob_train = torch.from_numpy(target_prob_train)
 
 input_seq_test= input_seq_test.to(device)
-target_prob_test = torch.from_numpy(target_prob_test)
-print(input_seq_train.shape)
+#target_prob_test = torch.from_numpy(target_prob_test)
+#print(input_seq_train.shape)
+"""
 for epoch in range(1, n_epochs + 1):
     optimizer.zero_grad() # Clears existing gradients from previous epoch
     #input_seq = input_seq.to(device)
@@ -155,7 +275,7 @@ for epoch in range(1, n_epochs + 1):
     #target_seq = target_prob_train.to(device)
     target_seq = Ytrain.to(device)
     
-    print("shape de la salida: ",output.shape)
+    #print("shape de la salida: ",output.shape)
     #print("shape target: ",target_seq.shape)
     #loss = criterion(output, target_seq.view(-1).long())
     loss = criterion(output, target_seq.long())
@@ -165,6 +285,53 @@ for epoch in range(1, n_epochs + 1):
     if epoch%10 == 0:
         print('Epoch: {}/{}.............'.format(epoch, n_epochs), end=' ')
         print("Loss: {:.4f}".format(loss.item()))
+"""
+
+for t in range(n_epochs): 
+    for batch_idx, (XX, YY) in enumerate(trainloader):
+        
+        optimizer.zero_grad() # Clears existing gradients from previous epoch
+        #input_seq = input_seq.to(device)
+        output, hidden = model(XX)
+        output = output.to(device)
+        #target_seq = target_prob_train.to(device)
+        target_seq = YY.to(device)
+        loss = criterion(output, target_seq.long())
+        loss.backward() # Does backpropagation and calculates gradients
+        optimizer.step() # Updates the weights accordingly
+        train_losses.append(loss.item())      
+
+    for (XX,YY) in valloader:
+        out,_= model(XX)
+        YY = YY.to(device)
+        loss = criterion(out,YY.long())
+        val_losses.append(loss.item())
+
+    train_loss = np.average(train_losses)
+    val_loss = np.average(val_losses)
+    avg_train_losses.append(train_loss)
+    avg_val_losses.append(val_loss)
+    ejex.append(t)
+    epoch_len = len(str(n_epochs))
+    
+    print_msg = (f'[{t:>{epoch_len}}/{n_epochs:>{epoch_len}}] ' +
+                    f'train_loss: {train_loss:.5f} ' +
+                    f'valid_loss: {val_loss:.5f}')
+    print(print_msg)
+    
+    train_losses = []
+    val_losses = []
+
+    # early_stopping needs the validation loss to check if it has decresed, 
+    # and if it has, it will make a checkpoint of the current model
+    early_stopping(val_loss, model)
+    
+    if early_stopping.early_stop:
+        print("Early stopping")
+        break
+
+# load the last checkpoint with the best model
+model.load_state_dict(torch.load('checkpoint.pt'))
 
 output, hidden = model(input_seq_test)
 
@@ -187,17 +354,23 @@ print("SHAPE DE LA SALIDA DE LA RED: ",output.shape)
 #prob = nn.functional.softmax(output[-1], dim=0).data
 #print("SHAPE DE PROB: ",prob.shape)
 acc = balanced_accuracy_score(Ytest,output.argmax(dim=1))
-print(acc)
+#print(acc)
+
+minposs = avg_val_losses.index(min(avg_val_losses))+1 
+plt.axvline(minposs, linestyle='--', color='r',label='Early Stopping Checkpoint')
+print("Tasa de acierto obtenida: ", acc)
+plt.plot(ejex,avg_train_losses)
+plt.plot(ejex,avg_val_losses)
+plt.show()
 """
-acc = 0
+#acc = 0
 for i in range(len(Ytest)):
     # Taking the class with the highest probability score from the output
-    clase = torch.argmax(output[i,:])
+    clase = output[i,:].argmax()
     #outNet = torch.max(prob, dim=0)[1].item()
+    print("clase predicha: ",clase)
+    print("clase groundtruth: ", Ytest[i])
 
-    if clase == Ytest[i]:
-        acc+=1
-
-print(acc/len(Ytest)*100)
+#print(acc/len(Ytest)*100)
 """
 #IMPLEMENTAR EARLY STOPPING
