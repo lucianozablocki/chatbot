@@ -20,6 +20,7 @@ import time
 import utils
 from utils import EarlyStopping
 from sklearn.metrics import balanced_accuracy_score
+from config import indxTrain,indxTest,indxVal
 
 #/////////////////////////////////////////////////////////////
 
@@ -90,6 +91,7 @@ def separate_dataset(correctedData,validation=True):
     indxVal = []
     Xval = None
     Yval = None
+    
     for i in range(cantidad_preg):
         if correctedData[i,0]!=clase_actual: #cambio de clase
             clase_actual = correctedData[i,0]
@@ -97,8 +99,13 @@ def separate_dataset(correctedData,validation=True):
             if clase_actual!=46 and clase_actual !=103 and clase_actual!=104 and clase_actual !=105: #clases con solo 1 patron no se incluyen en test
                 indxTest.append(np.random.randint(0, cantidadPregClase-1)+i) #tomo un indice al azar por clase y lo agrego al subconjunto de test
                 if validation:
-                    indxVal.append(np.random.randint(0, cantidadPregClase-1)+i)
-                #NO ESTA CONTROLADA LA REPETICION DE INDICES EN TEST Y VAL, ATM SE PUEDEN REPETIR
+                    insertIndx = True
+                    while insertIndx:
+                        j = np.random.randint(0, cantidadPregClase-1)+i
+                        if j not in indxTest:
+                            indxVal.append(j)
+                            insertIndx = False
+
     #Obtengo los indices de train
     indices = range(cantidad_preg)
     indxTrain = list(filter(lambda x: x not in indxTest and x not in indxVal, indices)) #al no meter clases con un solo patron al indxTest, pasan automaticamente al indxTrain
@@ -184,7 +191,7 @@ def getLabels(indxTrain, indxTest, indxVal, dataset):
 #/////////////////////////////////////////////////////////////
 
 class sRNN(nn.Module):
-    def __init__(self, input_size, output_size, hidden_dim, n_layers, bidirectional = False):
+    def __init__(self, input_size, output_size, hidden_dim, n_layers, dropout,bidirectional = False):
         super(sRNN, self).__init__()
 
         # Defining some parameters
@@ -193,11 +200,13 @@ class sRNN(nn.Module):
 
         #Defining the layers
         # RNN Layer
-        self.rnn = nn.LSTM(input_size, hidden_dim, n_layers, batch_first=True, bidirectional = bidirectional)   
+        self.rnn = nn.LSTM(input_size, hidden_dim, n_layers, batch_first=True, dropout = dropout,bidirectional = bidirectional)   
         #self.rnn = nn.RNN(input_size, hidden_dim, n_layers, batch_first=True) 
         # Fully connected layer
-        self.fc = nn.Linear(hidden_dim*maxlen*2, output_size)
-        #self.fc2 = nn.Linear(output_size,output_size)
+        self.pool = nn.AvgPool2d(2)
+        #self.fc = nn.Linear(hidden_dim*maxlen*2, output_size)
+        self.fc = nn.Linear(int((hidden_dim*maxlen)*1/2), output_size)
+        self.fc2 = nn.Linear(output_size,output_size)
     
     def forward(self, x):
         
@@ -216,8 +225,11 @@ class sRNN(nn.Module):
         #out = out.contiguous().view(-1, self.hidden_dim)
         #print("shape de out q entra a la fully connected ",out.shape)
         #import ipdb;ipdb.set_trace()
-        # print(out.shape)
+        #print(out.shape)
+        out = self.pool(out)
+        #print(out.shape)
         out = self.fc(out.reshape(-1,out.shape[2]*out.shape[1]))
+        out = self.fc2(out)
         #out = self.fc2(out)
         return out, hidden
     
@@ -230,8 +242,8 @@ class sRNN(nn.Module):
 #/////////////////////////////////////////////////////////////
 
 cantidad = 100000
-path_vectors = 'C:/Users/Juani/chatbot/fasttext-sbwc.3.6.e20.vec'
-path_dataset = "C:/Users/Juani/chatbot/preprocessedQuestions_lem.csv"
+path_vectors = 'C:/Users/lucy/chatbot/fasttext-sbwc.3.6.e20.vec'
+path_dataset = "C:/Users/lucy/chatbot/preprocessedQuestions_lem.csv"
 wordvectors = KeyedVectors.load_word2vec_format(path_vectors, limit=cantidad)
 dataset = pd.read_csv(path_dataset,delimiter=',',header=None)
 
@@ -241,7 +253,7 @@ X,tensorEmbedding,wordSet = generarDiccionario(dataset.values,wordvectors)
 
 #Genero los indices que necesito:
 
-indxTrain, indxTest,indxVal = separate_dataset(dataset.values)
+#indxTrain, indxTest,indxVal = separate_dataset(dataset.values)
 
 #Genero los tensores de train, test y val
 
@@ -264,56 +276,72 @@ Ytrain, Ytest, Yval = getLabels(indxTrain,indxTest,indxVal,dataset.values)
 
 batch_size_train = len(Xtrain)
 batch_size_test = len(Xtest)
+batch_size_val = len(Xval)
 #seq_len = maxlen
 input_seq_train = Xtrain
 input_seq_test = Xtest
+input_seq_val = Xval
 # input_seq_train = torch.from_numpy(input_seq_train)
 # input_seq_test = torch.from_numpy(input_seq_test)
 target_seq_train = Ytrain
 target_seq_test = Ytest
+target_seq_val = Yval
 # torch.cuda.is_available() checks and returns a Boolean True if a GPU is available, else it'll return False
 is_cuda = torch.cuda.is_available()
 
 # If we have a GPU available, we'll set our device to GPU. We'll use this device variable later in our code.
-# if is_cuda:
-#     device = torch.device("cuda")
-#     print("GPU is available")
-# else:
-device = torch.device("cpu")
-print("GPU not available, CPU used")
+if is_cuda:
+    device = torch.device("cuda")
+    print("GPU is available")
+else:
+    device = torch.device("cpu")
+    print("GPU not available, CPU used")
 
 cantidad_labels = dataset.values[len(dataset.values)-1,0] + 1
 # Instantiate the model with hyperparamet-ers
 
 dict_size = len(Xtrain[0][0])
 print("Dict_size: ",dict_size)
-model = sRNN(input_size=dict_size, output_size=cantidad_labels, hidden_dim=24, n_layers=1, bidirectional = True)
+dropout= 0.5
+model = sRNN(input_size=dict_size, output_size=cantidad_labels, hidden_dim=24, n_layers=2, dropout =dropout,bidirectional = True)
 
 # We'll also set the model to the device that we defined earlier (default is CPU)
 model = model.to(device)
 
 # Define hyperparameters
 n_epochs = 500
-lr=0.01
+#lr=0.01
+#Creo el trainset y el testset
+trainset = torch.utils.data.TensorDataset(input_seq_train,Ytrain) 
+testset = torch.utils.data.TensorDataset(input_seq_test,Ytest)
+valset = torch.utils.data.TensorDataset(input_seq_val,Yval)
+#Creo el dataloader
+batch_size = 500
+cant_test = batch_size_test
+cant_val = batch_size_val
 
+trainloader = torch.utils.data.DataLoader(trainset,batch_size=batch_size,shuffle=True) 
+testloader = torch.utils.data.DataLoader(testset,batch_size=cant_test,shuffle=True)
+valloader = torch.utils.data.DataLoader(valset,batch_size=cant_val,shuffle=True)
+patience=7
+early_stopping = EarlyStopping(verbose=True,patience=patience)
+train_losses = [] #vector que guarda el loss para cada epoca
+val_losses = []
+avg_train_losses = []
+avg_val_losses = []
+ejex = []
 # Define Loss, Optimizer
 criterion = nn.CrossEntropyLoss()
 # optimizer = torch.optim.Adam(model.parameters(), lr=lr)
 optimizer = torch.optim.Adam(model.parameters())
 early_stopping = EarlyStopping(verbose=True,patience=patience)
-# target_prob_train = np.zeros((len(Xtrain),cantidad_labels))
-# for i in range(len(target_seq_train)):
-#     target_prob_train[i,target_seq_train[i]] = 1
-# target_prob_test = np.zeros((len(Xtest),cantidad_labels))
-# for i in range(len(target_seq_test)):
-#     target_prob_test[i,target_seq_test[i]] = 1
-# Training Run
 input_seq_train = input_seq_train.to(device)
 # target_prob_train = torch.from_numpy(target_prob_train)
 
 input_seq_test= input_seq_test.to(device)
 # target_prob_test = torch.from_numpy(target_prob_test)
 print("input_seq_train.shape: ",input_seq_train.shape)
+"""
 for epoch in range(1, n_epochs + 1):
     optimizer.zero_grad() # Clears existing gradients from previous epoch
     #input_seq = input_seq.to(device)
@@ -339,6 +367,59 @@ output, hidden = model(input_seq_test)
 #print("La posta: ",YY[i].item())
 #acc = 0
 print("SHAPE DE LA SALIDA DE LA RED: ",output.shape)
+"""
 
+for t in range(n_epochs): 
+    for batch_idx, (XX, YY) in enumerate(trainloader):
+        
+        optimizer.zero_grad() # Clears existing gradients from previous epoch
+        #input_seq = input_seq.to(device)
+        output, hidden = model(XX)
+        output = output.to(device)
+        #target_seq = target_prob_train.to(device)
+        target_seq = YY.to(device)
+        loss = criterion(output, target_seq.long())
+        loss.backward() # Does backpropagation and calculates gradients
+        optimizer.step() # Updates the weights accordingly
+        train_losses.append(loss.item())      
+
+    for (XX,YY) in valloader:
+        out,_= model(XX)
+        YY = YY.to(device)
+        loss = criterion(out,YY.long())
+        val_losses.append(loss.item())
+
+    train_loss = np.average(train_losses)
+    val_loss = np.average(val_losses)
+    avg_train_losses.append(train_loss)
+    avg_val_losses.append(val_loss)
+    ejex.append(t)
+    epoch_len = len(str(n_epochs))
+    
+    print_msg = (f'[{t:>{epoch_len}}/{n_epochs:>{epoch_len}}] ' +
+                    f'train_loss: {train_loss:.5f} ' +
+                    f'valid_loss: {val_loss:.5f}')
+    print(print_msg)
+    
+    train_losses = []
+    val_losses = []
+
+    # early_stopping needs the validation loss to check if it has decresed, 
+    # and if it has, it will make a checkpoint of the current model
+    early_stopping(val_loss, model)
+    
+    if early_stopping.early_stop:
+        print("Early stopping")
+        break
+
+# load the last checkpoint with the best model
+model.load_state_dict(torch.load('checkpoint.pt'))
+
+output, hidden = model(input_seq_test)
 acc = balanced_accuracy_score(Ytest,output.argmax(dim=1))
-print(acc)
+minposs = avg_val_losses.index(min(avg_val_losses))+1 
+plt.axvline(minposs, linestyle='--', color='r',label='Early Stopping Checkpoint')
+print("Tasa de acierto obtenida: ", acc)
+plt.plot(ejex,avg_train_losses)
+plt.plot(ejex,avg_val_losses)
+plt.show()
