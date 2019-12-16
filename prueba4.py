@@ -8,6 +8,12 @@ from sklearn.metrics import balanced_accuracy_score
 import torch.nn.functional as F
 from utils import EarlyStopping
 from matplotlib import pyplot as plt
+import skorch
+from skorch import NeuralNetClassifier,NeuralNet
+from sklearn.model_selection import RandomizedSearchCV,train_test_split,GridSearchCV
+from mpl_toolkits import mplot3d
+import scipy.interpolate as interp
+from mpl_toolkits.mplot3d import Axes3D
 def one_hot_encode(indx, dict_size, maxlen, batch_size):
     # Creating a multi-dimensional array of zeros with the desired output shape
     features = np.zeros((batch_size, maxlen, dict_size), dtype=np.float32)
@@ -60,12 +66,11 @@ class sRNN(nn.Module):
         return hidden
 
 class CNN(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size,maxlen,n_layers=1):
+    def __init__(self, input_size, hidden_size, output_size,maxlen):
         super(CNN, self).__init__()
         self.input_size = input_size
         self.hidden_size = hidden_size
         self.output_size = output_size
-        self.n_layers = n_layers
 
         self.c1 = nn.Conv1d(input_size, hidden_size, 3,padding=1)
         self.a1 = nn.ReLU()
@@ -143,11 +148,11 @@ class CNN(nn.Module):
         #print("shape de la salida:",output.shape)
         
         #output = output.view(conv_seq_len, -1, self.output_size)
-        return output, hidden
+        return output
 
 correctedData = pn.read_csv("C:/Users/lucy/chatbot/preprocessedQuestions_lem.csv",delimiter=',',header=None) #comentar esta linea en caso de descomentar la anterior
 cantidad_preg = correctedData.shape[0]
-Xtrain,Ytrain,Xtest,Ytest,Xval,Yval = utils.separate_dataset(correctedData.values,cantidad_preg,True)
+#Xtrain,Ytrain,Xtest,Ytest,Xval,Yval = utils.separate_dataset(correctedData.values,cantidad_preg,True)
 print("llego hasta dsp de separate dataset")
 #print(correctedData.values[:,1])
 text = correctedData.values[:,1]
@@ -161,31 +166,38 @@ maxlen = len(max(text, key=len))
 # A simple loop that loops through the list of sentences and adds a ' ' whitespace until the length of
 # the sentence matches the length of the longest sentence
 
-for i in range(len(Xtrain)):
-    while len(Xtrain[i,0])<maxlen:
-        Xtrain[i,0] += ' ' 
+for i in range(len(text)):
+    while(len(text[i]))<maxlen:
+        text[i] += ' '
 
-for i in range(len(Xtest)):
-    while len(Xtest[i,0])<maxlen:
-        Xtest[i,0] += ' '
+#for i in range(len(Xtrain)):
+#    while len(Xtrain[i,0])<maxlen:
+#        Xtrain[i,0] += ' ' 
 
-for i in range(len(Xval)):
-    while len(Xval[i,0])<maxlen:
-        Xval[i,0] += ' '
+#for i in range(len(Xtest)):
+#    while len(Xtest[i,0])<maxlen:
+#        Xtest[i,0] += ' '
+
+#for i in range(len(Xval)):
+#    while len(Xval[i,0])<maxlen:
+#        Xval[i,0] += ' '
 
 print("llego hasta dsp de llenar con whitespace")
 #print(len(text[0]))
 char = CharTokenizer()
-indxTrain= np.zeros((len(Xtrain),maxlen))
-indxTest = np.zeros((len(Xtest),maxlen))
-indxVal = np.zeros((len(Xval),maxlen))
+indxChar = np.zeros((len(text),maxlen))
+#indxTrain= np.zeros((len(Xtrain),maxlen))
+#indxTest = np.zeros((len(Xtest),maxlen))
+#indxVal = np.zeros((len(Xval),maxlen))
 #indx es una matriz que tiene en cada fila los indices de los caracteres de la oracion, y maxlen columnas
-for i in range(len(Xtrain)):
-    indxTrain[i] = char.tokenize(Xtrain[i,0])
-for i in range(len(Xtest)):
-    indxTest[i] = char.tokenize(Xtest[i,0])
-for i in range(len(Xval)):
-    indxVal[i] = char.tokenize(Xval[i,0])
+for i in range(len(text)):
+    indxChar[i] = char.tokenize(text[i])
+#for i in range(len(Xtrain)):
+#    indxTrain[i] = char.tokenize(Xtrain[i,0])
+#for i in range(len(Xtest)):
+#    indxTest[i] = char.tokenize(Xtest[i,0])
+#for i in range(len(Xval)):
+#    indxVal[i] = char.tokenize(Xval[i,0])
 #print(indxTest[0])
 #print(indxTest[60])
 
@@ -193,19 +205,22 @@ print("llego hasta dsp de char tokenize")
 dict_size = len(char.char_set)
 #dict_size = 80
 #print(dict_size)
-batch_size_train = len(Xtrain)
-batch_size_test = len(Xtest)
-batch_size_val = len(Xval)
+#batch_size_train = len(Xtrain)
+#batch_size_test = len(Xtest)
+#batch_size_val = len(Xval)
 #seq_len = maxlen
-input_seq_train = one_hot_encode(indxTrain,dict_size,maxlen,batch_size_train)
-input_seq_test = one_hot_encode(indxTest,dict_size,maxlen,batch_size_test)
-input_seq_val = one_hot_encode(indxVal,dict_size,maxlen,batch_size_val)
-input_seq_train = torch.from_numpy(input_seq_train)
-input_seq_test = torch.from_numpy(input_seq_test)
-input_seq_val = torch.from_numpy(input_seq_val)
-target_seq_train = Ytrain
-target_seq_test = Ytest
-target_seq_val = Yval
+cant_preg = len(text)
+X = one_hot_encode(indxChar,dict_size,maxlen,cant_preg)
+Y = [x[0] for x in correctedData.values]
+#input_seq_train = one_hot_encode(indxTrain,dict_size,maxlen,batch_size_train)
+#input_seq_test = one_hot_encode(indxTest,dict_size,maxlen,batch_size_test)
+#input_seq_val = one_hot_encode(indxVal,dict_size,maxlen,batch_size_val)
+#input_seq_train = torch.from_numpy(input_seq_train)
+#input_seq_test = torch.from_numpy(input_seq_test)
+#input_seq_val = torch.from_numpy(input_seq_val)
+#target_seq_train = Ytrain
+#target_seq_test = Ytest
+#target_seq_val = Yval
 # torch.cuda.is_available() checks and returns a Boolean True if a GPU is available, else it'll return False
 is_cuda = torch.cuda.is_available()
 
@@ -221,20 +236,92 @@ cantidad_labels = correctedData.values[len(correctedData.values)-1,0] + 1
 # Instantiate the model with hyperparameters
 #model = sRNN(input_size=dict_size, output_size=cantidad_labels, hidden_dim=12, n_layers=1)
 #model = sRNN(input_size=dict_size, output_size=cantidad_labels, hidden_dim=20, n_layers=1,bidirectional=True)
-model = CNN(input_size=dict_size,hidden_size = 20,output_size=cantidad_labels,maxlen=maxlen)
+# Define hyperparameters
+n_epochs = 500
+batch_size = 500
+hidden_size = 20
+
+model = CNN(input_size=dict_size,hidden_size = hidden_size,output_size=cantidad_labels,maxlen=maxlen)
 # We'll also set the model to the device that we defined earlier (default is CPU)
 model = model.to(device)
 
-# Define hyperparameters
-n_epochs = 500
-#lr=0.01
+parameters = {    
+    #'module__hidden_dim' : [12,24,48,96],
+    'module__hidden_size' : [20],    
+    #'max_epochs' : [50,70,90,110,130,150]
+    'max_epochs' : [1,2,3,4],
+    'batch_size' : [500,1000,300,100]
+}
+net = NeuralNetClassifier(model,module__input_size = dict_size,module__hidden_size=hidden_size,module__output_size=cantidad_labels,module__maxlen=maxlen,criterion=torch.nn.CrossEntropyLoss,optimizer=torch.optim.Adam,verbose=1,device=device)
+gs = GridSearchCV(net,parameters,verbose=2,n_jobs=-2,cv=2,scoring='balanced_accuracy')
+X_train,X_test,y_train,y_test = train_test_split(X,Y,shuffle=True,stratify=Y,test_size=0.1,random_state=12)
+y_train_tensor = torch.LongTensor(y_train)
+y_test_tensor = torch.LongTensor(y_test)
+gs.fit(X_train,y_train_tensor)
+
+hidden_size = []
+max_epochs = []
+batch_size = []
+score = []
+
+# Utility function to report best scores (found online)
+def report(results, n_top=3):
+    for i in range(1, n_top + 1):
+        print(i)
+        candidates = np.flatnonzero(results['rank_test_score'] == i)
+        for candidate in candidates:
+            print("Model with rank: {0}".format(i))
+            print("Mean validation score: {0:.3f} (std: {1:.3f})".format(
+                  results['mean_test_score'][candidate],
+                  results['std_test_score'][candidate]))
+            print("Parameters: {0}".format(results['params'][candidate]))
+            print("")
+            batch_size.append(results['params'][candidate]['batch_size'])
+            hidden_size.append(results['params'][candidate]['module__hidden_size'])
+            max_epochs.append(results['params'][candidate]['max_epochs'])
+            score.append(results['mean_test_score'][candidate])
+
+report(gs.cv_results_,16)
+ejex = batch_size
+ejey = max_epochs
+print(ejex)
+print(ejey)
+print(len(ejex))
+print(len(ejey))
+ejez = [0.5,0.3,0.4,0.33,0.6,0.45,0.75,0.8,0.2,0.47,0.56,0.66,0.9,0.87,0.67,0.43]
+
+plotx,ploty, = np.meshgrid(np.linspace(np.min(ejex),np.max(ejex),10),\
+                           np.linspace(np.min(ejey),np.max(ejey),10))
+plotz = interp.griddata((ejex,ejey),ejez,(plotx,ploty),method='linear')
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.plot_surface(plotx,ploty,plotz,cstride=1,rstride=1,cmap='viridis')
+
+probs = gs.best_estimator_.predict_proba(X_test)
+
+# get training and validation loss
+epochs = [i for i in range(len(gs.best_estimator_.history))]
+train_loss = gs.best_estimator_.history[:,'train_loss']
+valid_loss = gs.best_estimator_.history[:,'valid_loss']
+acc = balanced_accuracy_score(y_test_tensor,np.argmax(probs,axis=1))
+print("tasa de acierto obtenida: ",acc)
+fig1 = plt.figure()
+plt.plot(epochs,train_loss,'g-')
+plt.plot(epochs,valid_loss,'r-')
+plt.title('Training Loss Curves')
+plt.xlabel('Epochs')
+plt.ylabel('Cross Entropy Loss')
+plt.legend(['Train','Validation'])
+
+plt.show()
+"""
 
 #Creo el trainset y el testset
 trainset = torch.utils.data.TensorDataset(input_seq_train,Ytrain) 
 testset = torch.utils.data.TensorDataset(input_seq_test,Ytest)
 valset = torch.utils.data.TensorDataset(input_seq_val,Yval)
 #Creo el dataloader
-batch_size = 500
+
 cant_test = batch_size_test
 cant_val = batch_size_val
 trainloader = torch.utils.data.DataLoader(trainset,batch_size=batch_size,shuffle=True) 
@@ -267,6 +354,7 @@ input_seq_test= input_seq_test.to(device)
 #target_prob_test = torch.from_numpy(target_prob_test)
 #print(input_seq_train.shape)
 """
+"""
 for epoch in range(1, n_epochs + 1):
     optimizer.zero_grad() # Clears existing gradients from previous epoch
     #input_seq = input_seq.to(device)
@@ -285,6 +373,7 @@ for epoch in range(1, n_epochs + 1):
     if epoch%10 == 0:
         print('Epoch: {}/{}.............'.format(epoch, n_epochs), end=' ')
         print("Loss: {:.4f}".format(loss.item()))
+"""
 """
 
 for t in range(n_epochs): 
@@ -362,6 +451,7 @@ print("Tasa de acierto obtenida: ", acc)
 plt.plot(ejex,avg_train_losses)
 plt.plot(ejex,avg_val_losses)
 plt.show()
+"""
 """
 #acc = 0
 for i in range(len(Ytest)):
