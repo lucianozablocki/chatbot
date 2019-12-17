@@ -66,12 +66,27 @@ class sRNN(nn.Module):
         return hidden
 
 class CNN(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size,maxlen):
+    def __init__(self, input_size, hidden_size, output_size,maxlen,num_layers):
         super(CNN, self).__init__()
         self.input_size = input_size
         self.hidden_size = hidden_size
         self.output_size = output_size
+        self.num_layers = num_layers
 
+        if num_layers == 2:
+            self.block=nn.Sequential(nn.Conv1d(input_size,hidden_size,3,padding=1),nn.ReLU(),nn.BatchNorm1d(hidden_size),nn.AvgPool1d(2),
+            nn.Conv1d(hidden_size,hidden_size,3,padding=1),nn.ReLU(),nn.BatchNorm1d(hidden_size),nn.AvgPool1d(2))
+        elif num_layers == 3:
+            self.block=nn.Sequential(nn.Conv1d(input_size,hidden_size,3,padding=1),nn.ReLU(),nn.BatchNorm1d(hidden_size),nn.AvgPool1d(2),
+            nn.Conv1d(hidden_size,hidden_size,3,padding=1),nn.ReLU(),nn.BatchNorm1d(hidden_size),nn.AvgPool1d(2),
+            nn.Conv1d(hidden_size,hidden_size,3,padding=1),nn.ReLU(),nn.BatchNorm1d(hidden_size),nn.AvgPool1d(2))
+        elif num_layers == 4:
+            self.block=nn.Sequential(nn.Conv1d(input_size,hidden_size,3,padding=1),nn.ReLU(),nn.BatchNorm1d(hidden_size),nn.AvgPool1d(2),
+            nn.Conv1d(hidden_size,hidden_size,3,padding=1),nn.ReLU(),nn.BatchNorm1d(hidden_size),nn.AvgPool1d(2),
+            nn.Conv1d(hidden_size,hidden_size,3,padding=1),nn.ReLU(),nn.BatchNorm1d(hidden_size),nn.AvgPool1d(2),
+            nn.Conv1d(hidden_size,hidden_size,3,padding=1),nn.ReLU(),nn.BatchNorm1d(hidden_size),nn.AvgPool1d(2))
+        self.out = nn.Linear(hidden_size*int(maxlen/2**num_layers),output_size)
+        """        
         self.c1 = nn.Conv1d(input_size, hidden_size, 3,padding=1)
         self.a1 = nn.ReLU()
         self.b1 = nn.BatchNorm1d(hidden_size)
@@ -91,11 +106,12 @@ class CNN(nn.Module):
         #)
         #self.gru = nn.GRU(hidden_size, hidden_size, n_layers, dropout=0.01)
         #self.gru = nn.GRU(input_size,hidden_size,n_layers,dropout=0.01)
-        self.out = nn.Linear(hidden_size*int(maxlen/2**3), output_size)
+        self.out = nn.Linear(hidden_size*int(maxlen/2**num_layers), output_size)
+        """
 
     def forward(self, inputs, hidden=None):
         #batch_size = inputs.size(1)
-        batch_size = inputs.size(0)
+        #batch_size = inputs.size(0)
         #print("dimensiones del tensor que entra a la cnn: ",inputs.shape)
         # Turn (seq_len x batch_size x input_size) into (batch_size x input_size x seq_len) for CNN
         #inputs = inputs.transpose(0, 1).transpose(1, 2)
@@ -103,7 +119,9 @@ class CNN(nn.Module):
         #entra un tensor de dimensiones: batch x seq_len x input_size
         #quiero un tensor dedimensiones: batch x input_size x seq_len
         inputs = inputs.transpose(1, 2)
-
+        x = self.block(inputs)
+        #print(x.shape)
+        """
         # Run through Conv1d and Pool1d layers
         c = self.c1(inputs)
         #print("Paso primera capa")
@@ -139,7 +157,8 @@ class CNN(nn.Module):
         
         #conv_seq_len = p.shape[2]
         #p = p.view(-1,conv_seq_len * self.hidden_size) # Treating (conv_seq_len x batch_size) as batch_size for linear layer
-        p = torch.flatten(p,start_dim=1)
+        """
+        p = torch.flatten(x,start_dim=1)
         #output = torch.tanh(self.out(output))
         #output = self.out(output.reshape(-1,conv_seq_len*self.hidden_size))
         #output = self.out(output.reshape(conv_seq_len*batch_))
@@ -240,20 +259,21 @@ cantidad_labels = correctedData.values[len(correctedData.values)-1,0] + 1
 n_epochs = 500
 batch_size = 500
 hidden_size = 20
-
-model = CNN(input_size=dict_size,hidden_size = hidden_size,output_size=cantidad_labels,maxlen=maxlen)
+num_layers=3
+model = CNN(input_size=dict_size,hidden_size = hidden_size,output_size=cantidad_labels,maxlen=maxlen,num_layers=num_layers)
 # We'll also set the model to the device that we defined earlier (default is CPU)
 model = model.to(device)
 
 parameters = {    
     #'module__hidden_dim' : [12,24,48,96],
-    'module__hidden_size' : [20],    
+    'module__hidden_size' : [20,30,40],    
     #'max_epochs' : [50,70,90,110,130,150]
-    'max_epochs' : [1,2,3,4],
-    'batch_size' : [500,1000,300,100]
+    'module__num_layers':[2,3,4],
+    'max_epochs' : [1],
+    'batch_size' : [1000,500,700]
 }
-net = NeuralNetClassifier(model,module__input_size = dict_size,module__hidden_size=hidden_size,module__output_size=cantidad_labels,module__maxlen=maxlen,criterion=torch.nn.CrossEntropyLoss,optimizer=torch.optim.Adam,verbose=1,device=device)
-gs = GridSearchCV(net,parameters,verbose=2,n_jobs=-2,cv=2,scoring='balanced_accuracy')
+net = NeuralNetClassifier(model,module__input_size = dict_size,module__hidden_size=hidden_size,module__output_size=cantidad_labels,module__maxlen=maxlen,module__num_layers=num_layers,criterion=torch.nn.CrossEntropyLoss,optimizer=torch.optim.Adam,verbose=1,device=device)
+gs = RandomizedSearchCV(net,parameters,verbose=2,n_jobs=-2,cv=2,scoring='balanced_accuracy',n_iter=5)
 X_train,X_test,y_train,y_test = train_test_split(X,Y,shuffle=True,stratify=Y,test_size=0.1,random_state=12)
 y_train_tensor = torch.LongTensor(y_train)
 y_test_tensor = torch.LongTensor(y_test)
