@@ -103,9 +103,16 @@ candidatos = 2
 rf_random = RandomizedSearchCV(estimator = rf, param_distributions = random_grid, n_iter = candidatos, cv = 10, verbose=2, random_state=12, n_jobs = -1,scoring='balanced_accuracy')
 # Fit the random search model
 y_test_tensor = torch.LongTensor(y_test)
+#from collections import Counter
+#count = Counter(y_train)
+#print(sorted(count.items(), key=lambda pair: pair[1], reverse=True))
+
 rf_random.fit(X_train, y_train)
 
 report(rf_random.cv_results_,candidatos) 
+probs = rf_random.best_estimator_.predict_proba(X_test)
+acc = balanced_accuracy_score(y_test_tensor,np.argmax(probs,axis=1))
+print("tasa de acierto obtenida: ",acc)
 
 ejex = n_estimators
 ejey = max_depth
@@ -120,9 +127,6 @@ fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 ax.plot_surface(plotx,ploty,plotz,cstride=1,rstride=1,cmap='viridis')
 
-#print(X_test.shape)            
-probs = gs.best_estimator_.predict_proba(X_test)
-#print(probs.shape)
 plt.show()
 
 """
