@@ -1,5 +1,5 @@
 # Import the model we are using
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestRegressor,RandomForestClassifier
 import pandas as pn
 import numpy as np
 import matplotlib.pyplot as plt
@@ -7,10 +7,13 @@ import utils
 from bow import BOW
 from nltk.corpus import stopwords
 import math
-from sklearn.model_selection import RandomizedSearchCV
+from sklearn.model_selection import RandomizedSearchCV,train_test_split
 import torch
 from sklearn.metrics import balanced_accuracy_score
-rf = RandomForestRegressor(random_state = 42)
+from mpl_toolkits import mplot3d
+import scipy.interpolate as interp
+from mpl_toolkits.mplot3d import Axes3D
+rf = RandomForestClassifier(random_state = 12)
 from pprint import pprint
 # Look at parameters used by our current forest
 print('Parameters currently in use:\n')
@@ -38,54 +41,91 @@ random_grid = {'n_estimators': n_estimators,
                'bootstrap': bootstrap}
 pprint(random_grid)
 
-
-#trainX_RF = pn.read_csv("trainX_RF.csv",header=None,delimiter=',').values
-#trainY_RF = pn.read_csv("trainY_RF.csv",header=None,delimiter=',').values
-#testX_RF = pn.read_csv("testX_RF.csv",header=None,delimiter=',').values
-#testY_RF = pn.read_csv("testY_RF.csv",header=None,delimiter=',').values
-
-
-
-correctedData = pn.read_csv("C:/Users/Juani/chatbot/preprocessedQuestions_lem.csv",delimiter=',') #comentar esta linea en caso de descomentar la anterior
+correctedData = pn.read_csv("C:/Users/lucy/chatbot/preprocessedQuestions_lem_completadas.csv",delimiter=',') #comentar esta linea en caso de descomentar la anterior
 cantidad_preg = correctedData.shape[0]
 correctedData = correctedData.values
 print(type(correctedData))
 print(correctedData.dtype)
-Xtrain_text,trainY_RF,Xtest_text,testY_RF,_,_ = utils.separate_dataset(correctedData,cantidad_preg,validation=False)
+#Xtrain_text,trainY_RF,Xtest_text,testY_RF,_,_ = utils.separate_dataset(correctedData,cantidad_preg,validation=False)
 # print('Hasta acá todo ok')
 # Instantiate model 
 stoplist = stopwords.words('spanish')
-print(Xtrain_text.shape)
-bow_unigram = BOW(Xtrain_text.ravel(),'ascii',stoplist,weighting = False)
-trainX_RF = bow_unigram.X
-testX_RF = bow_unigram.vectorizer.transform(Xtest_text.ravel())
-print('Training Features Shape:', trainX_RF.shape)#num_patrones x num_caracteristicas
-print('Training Labels Shape:', trainY_RF.shape)#vector columna
-print('Testing Features Shape:', testX_RF.shape) 
-print('Testing Labels Shape:', testY_RF.shape)#vector columna
+#print(Xtrain_text.shape)
+bow_unigram = BOW(correctedData[:,1],'ascii',stoplist,weighting = False)
 
-trainX_RF = trainX_RF.toarray()
-# trainX_RF = torch.from_numpy(trainX_RF)
+Y = np.zeros((cantidad_preg),dtype=np.int64)
+for i in range(cantidad_preg):
+    Y[i] = correctedData[i,0]
 
-trainY_RF = trainY_RF.numpy()
-# trainY_RF = torch.from_numpy(trainY_RF)
+Y = torch.from_numpy(Y)
+print(Y)
 
-testX_RF = testX_RF.toarray()
-# testX_RF = torch.from_numpy(testX_RF)
+# Number of trees in random forest
+n_estimators = []
+# Number of features to consider at every split
+max_features = []
+# Maximum number of levels in tree
+max_depth= []
+# Minimum number of samples required to split a node
+min_samples_split = []
+# Minimum number of samples required at each leaf node
+min_samples_leaf = []
+# Method of selecting samples for training each tree
+bootstrap = [True, False]
+score=[]
+std=[]
 
-testY_RF = testY_RF.type(torch.DoubleTensor)
-# testY_RF = testY_RF.toarray()
-# testY_RF = torch.from_numpy(testY_RF)
+def report(results, n_top=3):
+    for i in range(1, n_top + 1):
+        candidates = np.flatnonzero(results['rank_test_score'] == i)
+        for candidate in candidates:
+            print("Model with rank: {0}".format(i))
+            print("Mean validation score: {0:.3f} (std: {1:.3f})".format(
+                results['mean_test_score'][candidate],
+                results['std_test_score'][candidate]))
+            print("Parameters: {0}".format(results['params'][candidate]))
+            print("")
+            score.append(results['mean_test_score'][candidate])
+            std.append(results['std_test_score'][candidate])
+            n_estimators.append(results['params'][candidate]['n_estimators'])
+            max_features.append(results['params'][candidate]['max_features'])
+            max_depth.append(results['params'][candidate]['max_depth'])
+            min_samples_split.append(results['params'][candidate]['min_samples_split'])
+            min_samples_leaf.append(results['params'][candidate]['min_samples_leaf'])
 
 # Use the random grid to search for best hyperparameters
 # First create the base model to tune
-rf = RandomForestRegressor()
+#rf = RandomForestRegressor()
 # Random search of parameters, using 3 fold cross validation, 
 # search across 100 different combinations, and use all available cores
-rf_random = RandomizedSearchCV(estimator = rf, param_distributions = random_grid, n_iter = 20, cv = 3, verbose=2, random_state=42, n_jobs = -1)
+X_train,X_test,y_train,y_test = train_test_split(bow_unigram.X,Y,shuffle=True,stratify=Y,test_size=0.1,random_state=12)
+candidatos = 2
+rf_random = RandomizedSearchCV(estimator = rf, param_distributions = random_grid, n_iter = candidatos, cv = 10, verbose=2, random_state=12, n_jobs = -1,scoring='balanced_accuracy')
 # Fit the random search model
-rf_random.fit(trainX_RF, trainY_RF)
+y_test_tensor = torch.LongTensor(y_test)
+rf_random.fit(X_train, y_train)
 
+report(rf_random.cv_results_,candidatos) 
+
+ejex = n_estimators
+ejey = max_depth
+#print(ejez)
+#print(len(ejez))
+#ejez = [0.5,0.3,0.4,0.33,0.6,0.45,0.75,0.8,0.2,0.47,0.56,0.66,0.9,0.87,0.67,0.43]
+ejez = score
+plotx,ploty, = np.meshgrid(np.linspace(np.min(ejex),np.max(ejex),10),\
+                           np.linspace(np.min(ejey),np.max(ejey),10))
+plotz = interp.griddata((ejex,ejey),ejez,(plotx,ploty),method='linear')
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.plot_surface(plotx,ploty,plotz,cstride=1,rstride=1,cmap='viridis')
+
+#print(X_test.shape)            
+probs = gs.best_estimator_.predict_proba(X_test)
+#print(probs.shape)
+plt.show()
+
+"""
 def evaluate(model, test_features, test_labels):
     predictions = model.predict(test_features)
     errors = abs(predictions - test_labels)
@@ -161,3 +201,5 @@ print("Best accuracy: ",bestacc)
 # # Calculate and display accuracy
 # #accuracy = 100 - np.mean(mape)
 # #print('Accuracy:', round(accuracy, 2), '%.')
+
+"""
