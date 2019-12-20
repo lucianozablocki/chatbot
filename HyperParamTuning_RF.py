@@ -38,7 +38,8 @@ random_grid = {'n_estimators': n_estimators,
                'max_depth': max_depth,
                'min_samples_split': min_samples_split,
                'min_samples_leaf': min_samples_leaf,
-               'bootstrap': bootstrap}
+               'bootstrap': bootstrap,
+               'random_state': [12]}
 pprint(random_grid)
 
 correctedData = pn.read_csv("C:/Users/lucy/chatbot/preprocessedQuestions_lem_completadas.csv",delimiter=',') #comentar esta linea en caso de descomentar la anterior
@@ -100,7 +101,7 @@ def report(results, n_top=3):
 # search across 100 different combinations, and use all available cores
 X_train,X_test,y_train,y_test = train_test_split(bow_unigram.X,Y,shuffle=True,stratify=Y,test_size=0.1,random_state=12)
 candidatos = 2
-rf_random = RandomizedSearchCV(estimator = rf, param_distributions = random_grid, n_iter = candidatos, cv = 10, verbose=2, random_state=12, n_jobs = -1,scoring='balanced_accuracy')
+rf_random = RandomizedSearchCV(estimator = rf, param_distributions = random_grid, n_iter = candidatos, cv = 10, verbose=2, random_state=12, n_jobs = -2,scoring='balanced_accuracy')
 # Fit the random search model
 y_test_tensor = torch.LongTensor(y_test)
 #from collections import Counter
