@@ -24,9 +24,9 @@ bow_unigram = bow.BOW(dataset.values[:,1],'ascii',stoplist,True)
 
 def preprocesar(input):
     i = quitarStopwordsinput([input])
-    i = limpiarSignosinput(input)
-    i = AutocorrectorInput([input])
-    i = Stemmizarinput([input])
+    i = limpiarSignosinput(i)
+    i = AutocorrectorInput([i])
+    i = Stemmizarinput([i])
     return i
 
 while(True):
