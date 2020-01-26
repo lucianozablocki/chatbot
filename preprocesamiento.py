@@ -30,7 +30,20 @@ def LematizarOracion(sentence): #Recibo string
         oracion = oracion + token.lemma_ + ' '
     return (oracion)
 
-
+def limpiarSignosinput(inp):
+    aux = inp.replace('"', '')
+    aux = aux.replace('?','') #Borro signos de preguntas...
+    aux = aux.replace('¿','')
+    aux = aux.replace('!','')#.. y signos de exclamacion
+    aux = aux.replace('¡','')
+    aux = aux.replace(',','') #Borro comas
+    aux = aux.replace('á','a') #Reemplazo signos de puntuación...
+    aux = aux.replace('é','e')
+    aux = aux.replace('í','i')
+    aux = aux.replace('ó','o')
+    aux = aux.replace('ú','u')
+    aux = aux.lower() #Llevo todo a minuscula
+    return aux
 def limpiarSignos(preguntas):
     t = time.time()
     for i in range(preguntas.shape[0]):
@@ -63,7 +76,15 @@ def quitarStopwords(preguntas):
         preguntas[i][1] = oracion #Dejo en la matriz la oracion limpia
     print('Elapsed in quitarstopwords: ' ,(time.time() - t))    
     return (preguntas)
-
+def quitarStopwordsinput(input):
+    ret = ''
+    for w in input:
+        if w not in stoplist:
+            print(w)
+            ret = ret + w + ''
+        else:
+            print("erasing word")
+    return ret
 #metodo que elimina las stopwords de un comentario
 def remove_stopwords(preguntas, stopwords):
     n=preguntas.shape[0]
@@ -76,7 +97,12 @@ def remove_stopwords(preguntas, stopwords):
         resultado.append(result)
         #resultado.append("\n")
     return resultado
-
+def Stemmizarinput(inp):
+    ret = ''
+    for w in inp:
+        palabraStem = spanishStem.stem(w)
+        ret = ret + palabraStem + ''
+    return ret
 def Stemmizar (preguntas):
    for i in range(preguntas.shape[0]):
        words = word_tokenize(preguntas[i][1])
@@ -90,6 +116,7 @@ def Stemmizar (preguntas):
 def Autocorrector (preguntas): #Recibe una matriz, es para corregir la matriz de preguntas
     t =time.time()
     for i in range(preguntas.shape[0]):
+        print(i)
         words = word_tokenize(preguntas[i][1])
         # print(words)
         
@@ -122,12 +149,12 @@ def preprocesar(preguntas,tipo):
     preguntas = limpiarSignos(preguntas)
     print("---finished limpiarSignos---")
     #preguntas_otras = remove_stopwords(preguntas,stoplist)
-    print("---init quitarStopwords---")
-    print("---finished quitarStopwords---")
+    #print("---init quitarStopwords---")
+    #print("---finished quitarStopwords---")
     print("---init autocorrector---")
-    # preguntas = Autocorrector(preguntas)
+    preguntas = Autocorrector(preguntas)
     # print("hola")
-    # print("---finished autocorrector---")
+    print("---finished autocorrector---")
     if tipo==2:
         print("---init stemming---")
         preguntas = Stemmizar(preguntas) #<--- Descomentar esto, y comentar el Lematizador
@@ -151,8 +178,8 @@ if __name__ == "__main__": #modificar metodos para devolver preguntas preprocesa
     ################
     print("Guardando como csv...")
     df_correctedData = pn.DataFrame(correctedData)
-    df_correctedData.to_csv('preprocessedQuestions.csv', index=False,header=False)
+    df_correctedData.to_csv('preprocessedQuestions_lem.csv', index=False,header=False)
 
-    dataset = pn.read_csv("preprocessedQuestions.csv",header=None,delimiter=',')
+    dataset = pn.read_csv("preprocessedQuestions_lem.csv",header=None,delimiter=',')
     print(dataset.shape)
     
