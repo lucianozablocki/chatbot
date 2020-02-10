@@ -77,13 +77,14 @@ def quitarStopwords(preguntas):
     print('Elapsed in quitarstopwords: ' ,(time.time() - t))    
     return (preguntas)
 def quitarStopwordsinput(input):
+    # print(f"input received in quitarstopwordsinput: {input}")
     ret = ''
     for w in input:
         if w not in stoplist:
-            print(w)
-            ret = ret + w + ''
-        else:
-            print("erasing word")
+            # print(f"{w} not in stoplist, adding to preproc output")
+            ret = ret + w + ' '
+        # else:
+            # print("erasing word")
     return ret
 #metodo que elimina las stopwords de un comentario
 def remove_stopwords(preguntas, stopwords):
@@ -99,9 +100,11 @@ def remove_stopwords(preguntas, stopwords):
     return resultado
 def Stemmizarinput(inp):
     ret = ''
+    # print(inp)
     for w in inp:
         palabraStem = spanishStem.stem(w)
-        ret = ret + palabraStem + ''
+        # print(f"{w} se convirtio en {palabraStem}")
+        ret = ret + palabraStem + ' '
     return ret
 def Stemmizar (preguntas):
    for i in range(preguntas.shape[0]):
