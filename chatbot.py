@@ -21,6 +21,7 @@ loaded_model = pickle.load(open(filename, 'rb'))
 #loaded_bow = pickle.load(open(path_bow,'rb'))
 thres = 0.1
 
+# nltk.download('stopwords')
 stoplist = stopwords.words('spanish')
 dataset = pd.read_csv(path_quest,header=None)
 bow_unigram = bow.BOW(dataset.values[:,1],'ascii',stoplist,True)
