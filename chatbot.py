@@ -1,14 +1,16 @@
 import sys, pandas as pd, pickle, numpy as np, preprocesamiento,bow
 from preprocesamiento import quitarStopwordsinput,limpiarSignosinput,AutocorrectorInput,Stemmizarinput
 from nltk.corpus import stopwords
-filename = 'C:/Users/lucy/chatbot/SVC_entrenado.sav'
-path_ans = 'C:/Users/lucy/chatbot/respuestas - respuestas.csv'
-path_adjMat = 'C:/Users/lucy/chatbot/adjMat.csv'
-path_quest = 'C:/Users/lucy/chatbot/preprocessedQuestions_stem_completadas.csv'
-path_placeholders =  'C:/Users/lucy/chatbot/placeholders.csv'
+import sklearn
+filename = './SVC_stem.sav'
+path_ans = './respuestas - respuestas.csv'
+path_adjMat = './adjMat.csv'
+# path_quest = './preprocessedQuestions_stem_completadas.csv'
+path_placeholders =  './placeholders.csv'
+path_bow = "./bow_w_stopwords.sav"
 
-#print(len(sys.argv))
-#print(sys.argv)
+print(f'The scikit-learn version is {sklearn.__version__}.')
+
 R_pd = pd.read_csv(path_ans,delimiter=',',header=None)
 adjMat_pd = pd.read_csv(path_adjMat,delimiter=',',header=None)
 R = R_pd.values
@@ -18,18 +20,13 @@ placeholders = placeholders_pd.values
 # print(adjMat.shape)
 actual_node = 109
 loaded_model = pickle.load(open(filename, 'rb'))
-#loaded_bow = pickle.load(open(path_bow,'rb'))
-thres = 0.1
+bow_unigram = pickle.load(open(path_bow, 'rb'))
+thres = 0.01
 
-# nltk.download('stopwords')
 stoplist = stopwords.words('spanish')
-dataset = pd.read_csv(path_quest,header=None)
-bow_unigram = bow.BOW(dataset.values[:,1],'ascii',stoplist,True)
-
 keys = placeholders[:,0]
 values = placeholders[:,1]
 replacements = dict(zip(keys,values))
-# print(replacements)
 
 def preprocesar(sentence):
     # print(f"preprocesar method, input its: {sentence}")
@@ -51,12 +48,11 @@ while(True):
     i = input()
     pre_input = preprocesar(i)
     print("input after preproc: ", pre_input)
-    model_input = bow_unigram.vectorizer.transform([pre_input])
+    model_input = bow_unigram.transform([pre_input])
     probs = loaded_model.predict_proba(model_input)
     print(f"max prob is {np.max(probs)}")
-    # print(probs.shape)
-    # print(np.argmax(probs))
-    # print(probs)
+    print(f"predicted node is {np.argmax(probs)}")
+    
     if(any(x > thres for x in probs[0])):
         if actual_node == 109:
             probs_flux = probs

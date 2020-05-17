@@ -3,14 +3,14 @@ from nltk.corpus import stopwords
 import pandas as pn
 import numpy as np
 import nltk
-from nltk.stem.snowball import SnowballStemmer
+from nltk.stem.snowball import SpanishStemmer
 from spellchecker import SpellChecker
 import spacy
 import time
 
 nlp = spacy.load('es_core_news_sm')
 stoplist = stopwords.words('spanish')
-spanishStem=SnowballStemmer('spanish')
+spanishStem=SpanishStemmer('spanish')
 spell = SpellChecker(language='es')
 
 def Lematizar(preguntas): #Recibo matriz de preguntas/respuestas

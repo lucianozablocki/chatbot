@@ -3,7 +3,7 @@ from nltk.corpus import stopwords
 import pandas
 #import preprocesamiento #los metodos de preprocesamiento.py reciben datos en la forma: data.values donde data
                         #es producto de leer csv con pandas.read_csv
-import torch as tr
+# import torch as tr
 
 class BOW():
     def __init__(self,dataset,strip_accents,stoplist,weighting,ngram = None):
