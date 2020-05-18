@@ -2,12 +2,13 @@ import sys, pandas as pd, pickle, numpy as np, preprocesamiento,bow
 from preprocesamiento import quitarStopwordsinput,limpiarSignosinput,AutocorrectorInput,Stemmizarinput
 from nltk.corpus import stopwords
 import sklearn
-filename = './SVC_stem.sav'
-path_ans = './respuestas - respuestas.csv'
-path_adjMat = './adjMat.csv'
+import datetime
+filename = './SVC_stem_time.sav'
+path_ans = './respuestas - time.csv'
+path_adjMat = './adjMat_time.csv'
 # path_quest = './preprocessedQuestions_stem_completadas.csv'
 path_placeholders =  './placeholders.csv'
-path_bow = "./bow_w_stopwords.sav"
+path_bow = "./bow_w_stopwords_time.sav"
 
 print(f'The scikit-learn version is {sklearn.__version__}.')
 
@@ -18,7 +19,7 @@ adjMat = adjMat_pd.values
 placeholders_pd = pd.read_csv(path_placeholders,delimiter=',',header=None)
 placeholders = placeholders_pd.values
 # print(adjMat.shape)
-actual_node = 115
+actual_node = 116
 loaded_model = pickle.load(open(filename, 'rb'))
 bow_unigram = pickle.load(open(path_bow, 'rb'))
 thres = 0.01
@@ -43,22 +44,25 @@ def preprocesar(sentence):
 def obtenerNodo(case):
     switcher = {
         "bachiller" : 69,
-        "licenciatura" : 106,
-        "curso": 107,
-        "tecnicatura": 108,
-        "posgrado": 109,
+        "licenciatura" : 107,
+        "curso": 108,
+        "tecnicatura": 109,
+        "posgrado": 110,
         "reconquista": 88,
-        "galvez": 110,
-        "rafaela": 111
+        "galvez": 111,
+        "rafaela": 112
     }
 
-    return switcher.get(case, 107) #default->error adm
+    return switcher.get(case, 114) #default->error adm
 
 while(True):
     print(f"actual node is: {actual_node}")
     for placeholder in replacements:
         R[actual_node][1] = R[actual_node][1].replace(f'<{placeholder}>', replacements[placeholder])
     print(R[actual_node][1])
+    if(actual_node==106):
+        print(datetime.datetime.now().strftime("%H:%M:%S")) 
+
     i = input()
     pre_input = preprocesar(i)
     print("input after preproc: ", pre_input)
@@ -68,10 +72,10 @@ while(True):
     print(f"predicted node is {np.argmax(probs)}")
     
     if(any(x > thres for x in probs[0])):
-        if actual_node == 115:
+        if actual_node == 116:
             probs_flux = probs
         else:
-            probs_flux = probs*adjMat[actual_node][0:106]
+            probs_flux = probs*adjMat[actual_node][0:107]
         next_node = np.argmax(probs_flux)
         actual_node = next_node
         if actual_node == 69:
@@ -87,8 +91,8 @@ while(True):
             contexto = input()
             actual_node = 37 if contexto == "administrativo" else 97
     elif R[actual_node][2] == 1: #administrative error
-        actual_node = 113
-    elif R[actual_node][2] == 2: #academic error
         actual_node = 114
+    elif R[actual_node][2] == 2: #academic error
+        actual_node = 115
     else: #general error
-        actual_node = 112
+        actual_node = 113

@@ -2,9 +2,9 @@ import numpy as np
 import pandas as pn
 import sys
 #nodosAcad = range()
-n = 115 #n -> cantidad de respuestas
+n = 116 #n -> cantidad de respuestas
 adjMat = np.zeros((n,n))
-resp = pn.read_csv('./respuestas - respuestas.csv',header=None)
+resp = pn.read_csv('./respuestas - time.csv',header=None)
 respMat = resp.values
 #print(respMat)
 cantidadRespuestas = respMat.shape[0]
@@ -37,6 +37,9 @@ for i in range(cantidadRespuestas):
 
     elif respMat[i,2] == 8:
         nodoChat = respMat[i,0]
+    
+    elif respMat[i,2] == 10:
+        nodoTime = respMat[i,0]
 
 
 # print(academicas)
@@ -50,6 +53,7 @@ for i in range (len(academicas)):
     adjMat[academicas[i],academicas[i]] = 0 #Para que no pueda volver a emitir la misma respuesta
     adjMat[academicas[i],nodoErrorAca] = 1 
     adjMat[academicas[i],nodoBye] = 1
+    adjMat[academicas[i],nodoTime] = 1
 
 for i in range (len(administrativas)):
 
@@ -57,6 +61,8 @@ for i in range (len(administrativas)):
     adjMat[administrativas[i],administrativas[i]] = 0 #Para que no pueda volver a emitir la misma respuesta
     adjMat[administrativas[i],nodoErrorAdm] = 1
     adjMat[administrativas[i],nodoBye] = 1    
+    adjMat[administrativas[i],nodoTime] = 1
+    
 # print(adjMat[11,:])
 # print(adjMat[11,:])
 # print(adjMat[102,:])
@@ -92,4 +98,4 @@ adjMat[nodoErrorAca,academicas] = 1
 adjMat[nodoErrorAdm,nodoErrorAdm] = 1
 adjMat[nodoErrorAdm,administrativas] = 1
 
-pn.DataFrame(adjMat).to_csv("./new_adjMat.csv", header=None, index=None)
+pn.DataFrame(adjMat).to_csv("./adjMat_time.csv", header=None, index=None)
