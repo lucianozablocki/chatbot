@@ -2,9 +2,9 @@ import numpy as np
 import pandas as pn
 import sys
 #nodosAcad = range()
-n = 109 #n -> cantidad de respuestas
+n = 115 #n -> cantidad de respuestas
 adjMat = np.zeros((n,n))
-resp = pn.read_csv('C:/Users/lucy/chatbot/respuestas - respuestas.csv',header=None)
+resp = pn.read_csv('./respuestas - respuestas.csv',header=None)
 respMat = resp.values
 #print(respMat)
 cantidadRespuestas = respMat.shape[0]
@@ -92,4 +92,4 @@ adjMat[nodoErrorAca,academicas] = 1
 adjMat[nodoErrorAdm,nodoErrorAdm] = 1
 adjMat[nodoErrorAdm,administrativas] = 1
 
-pn.DataFrame(adjMat).to_csv("C:/Users/lucy/chatbot/adjMat.csv", header=None, index=None)
+pn.DataFrame(adjMat).to_csv("./new_adjMat.csv", header=None, index=None)

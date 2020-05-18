@@ -64,7 +64,7 @@ Los Cursos de Formación Profesional, los Cursos de Posgrado y las carreras pert
 En la Oferta Académica encontrarás toda la información sobre costos y formas de pago de la carrera que elijas
 Para visualizar los costos de cada propuesta, accedé a la sección “Carreras y Cursos” desde el menú principal del Portal UNLVirtual e, inmediatamente, seleccioná el tipo de carrera que te interesa: Ciclo inicial, Tecnicatura, Ciclo de Licenciatura, Curso de Formación Profesional. Luego, hacé click sobre la carrera que has elegido. Al abrirse este enlace encontrarás información sobre la propuesta y, al descender con la barra de desplazamiento del navegador, una serie de pestañas. La última de estas pestañas posee información sobre los costos actualizados para el año académico <AÑO_ACTUAL>.""",1
 29,"""Las carreras se abonan por materia, en uno o dos pagos, y sus costos están actualizados en el Portal UNLVirtual. Antes de comenzar el cursado de cada materia, deberás saldar al menos la cuota 1. Esto quiere decir que abonarás ese costo a medida que inicien las asignaturas a las cuales te hayas inscripto según el Plan de Estudios y el Calendario Académico correspondientes a la carrera. Una vez realizado ese pago, podrás cursar, regularizar e inclusive rendir y aprobar la materia. La totalidad de las cuotas deben estar saldadas al momento de tramitar el título o certificado. Los pagos re alizan a través de los siguientes medios de pago: <mediosDePago>. Por otro lado, podrás gestionar el pago de las cuotas 2 durante transcurso de la carrera.""",1
-30,"""Las inscripciones a carreras de UNLVirtual se realizan completando el formulario online habilitado en nuestro Portal web durante el período de inscripción al año <año_actual>, el cual es <periodoInscripcionCarrera>. Una vez efectuada la inscripción, te convertís en aspirante de una propuesta, por lo que recibirás en tu cuenta de correo personal los datos de nombre de usuario y contraseña que te permitirán acceder al Campus Virtual UNL. Luego deberas entregar la documentación solicitada en el Centro Multimedial de Educación a Distancia, ubicado en <direccionCEMED> o la sede UNL elegida <listaSedes>. Recordá que la documentación no debe ser remitida a la Facultad.. Dentro del Portal UNLVirtual encontrarás la Guía de Ingreso, donde podrás acceder a mayor información sobre la entrega de la documentación y gestiones para tener en cuenta al ingresar a UNLVirtual <link_guiaDeIngreso>""",1
+30,"""Las inscripciones a carreras de UNLVirtual se realizan completando el formulario online habilitado en nuestro Portal web durante el período de inscripción al año <AÑO_ACTUAL>, el cual es <periodoInscripcionCarrera>. Una vez efectuada la inscripción, te convertís en aspirante de una propuesta, por lo que recibirás en tu cuenta de correo personal los datos de nombre de usuario y contraseña que te permitirán acceder al Campus Virtual UNL. Luego deberas entregar la documentación solicitada en el Centro Multimedial de Educación a Distancia, ubicado en <direccionCEMED> o la sede UNL elegida <listaSedes>. Recordá que la documentación no debe ser remitida a la Facultad.. Dentro del Portal UNLVirtual encontrarás la Guía de Ingreso, donde podrás acceder a mayor información sobre la entrega de la documentación y gestiones para tener en cuenta al ingresar a UNLVirtual <link_guiaDeIngreso>""",1
 31,"""Luego de completar el formulario de inscripción online para la carrera elegida, podrás acceder desde el Campus Virtual al formulario FUAA de Solicitudes Especiales. Dichas solicitudes son: Cambio de Modalidad, Constancia de Documentación Archivada, Excepción a los Cursos de Ingreso y la inscripción contemplada bajo el artículo nº 7 de la Ley de Educación Superior.
 Podrás descargar los instructivos que contienen los requisitos correspondientes para realizar las diferentes Solicitudes Especiales en la Guía de Ingreso, disponible en el menú principal del Portal UNLVirtual. A continuación, adjunto el enlace correspondiente: <link_solicitudesEspeciales>
 Una vez que hayas realizado la inscripción online, dispondrás de una vía de comunicación institucional destinada al apoyo operativo-administrativo de los aspirantes: el ambiente de Atención al Aspirante. Por este medio podrás establecer contacto con un Tutor o Tutora de Sistema, a quien podrás hacer consultas sobre el acceso al formulario FUAA y sobre proceso de admisión a las propuestas de UNLVirtual.""",1
@@ -138,11 +138,7 @@ Las materias disponen de un calendario académico en el que se detallan las fech
 Si no sos ingresante, podrás realizar la inscripción a cursado por medio del Sistema SIU Guaraní dentro del período habilitado,y, luego seleccionar un plan de pago para poder abonar y tener acceso a las aulas virtuales correspondientes.""",1
 67,"""No existen horarios fijos de cursado. Al dictarse bajo la modalidad a distancia, las carreras del Programa UNLVirtual pueden cursarse online en cualquier día y horario, de acuerdo con la disponibilidad del alumno.""",1
 68,"""Cada año académico se compone de dos cuatrimestres, dentro de los cuales se habilita un grupo de materias para el cursado. Cada alumno elige qué materias desea cursar, para lo cual primero realiza una inscripción y luego abona al menos la cuota 1. Se recomienda seguir el cursado pautado en el plan de estudios de cada propuesta, pero esto no es obligatorio.""",1
-69,"""El Bachiller Universitario en Ciencias Jurídicas y Sociales tiene una duración de 2 años.
-Los Ciclos de Licenciatura tienen una duración de 2 años y medio.
-Los Cursos de Formación Profesional tienen una duración de 5 a 10 meses.
-Las Tecnicaturas tienen una duración de entre 2 años y medio y 3.
-Los Cursos de Posgrado tienen una duración de entre 3 y 5 meses.""",1
+69,"""El Bachiller Universitario en Ciencias Jurídicas y Sociales tiene una duración de 2 años.""",1
 70,"""Este requerimiento se visualiza debido a un deslogueo dentro del aula o sección. Si se te presenta este inconveniente, no intentes loguearte dentro el aula, ya que esto no será posible;  deberás informar la situación al Tutor de Sistema, a través del Ambiente de Atención al Estudiante.""",1
 71,"""Recordá que el aula de cursado de cada materia se habilita durante la tarde del día de inicio académico definido en el Calendario académico, para todos aquellos alumnos que previamente hayan completado inscripción a cursado y abonado al menos la cuota 1 de la materia dentro de sus vencimientos.
 En caso de no contar con acceso al aula, podrás informar la situación al Tutor de Sistema a través del Ambiente de Atención al Estudiante.""",1
@@ -169,11 +165,9 @@ No se pueden otorgar constancias de exámenes para las carreras o cursos que no 
 85,"""Para solicitar un certificado de alumno regular, ingresá al Sistema SIU Guaraní, sección “pedido de certificados”. Una vez que realices el pedido por ese medio, el certificado se enviará a tu domicilio o a la sede UNL a la que pertenezcas (en el caso de que hayas seleccionado una al momento de realizar la inscripción) en un plazo no mayor a 20 días. Podés solicitar un certificado de alumno regular por cuatrimestre. Si necesitás más certificados, te recomiendo que realices copias y las certifiques.""",1
 86,"""Para solicitar un certificado de historia académica, ingresá al Sistema SIU Guaraní, sección “pedido de certificados”. Una vez que realices el pedido por ese medio, el certificado se enviará a tu domicilio o a la sede UNL a la que pertenezcas (en el caso de que hayas seleccionado una al momento de realizar la inscripción) en un plazo no mayor a 20 días. Podés solicitar un certificado de historia académica por cuatrimestre. Si necesitás más certificados, te recomendamos que realices copias y las certifiques.""",1
 87,"""Una vez que todas las materias del plan de estudios de la propuesta consten en tu historial académico y hayas saldado todas las cuotas, podrás solicitar una constancia de libre de deuda. Para ello, te deberás poner en contacto con tu Tutor de Sistema a través del Ambiente de Atención al Estudiante. Tu Tutor realizará el pedido al Departamento Contable de CEMED. Una vez que se haya confeccionado el certificado, será enviado a tu domicilio o a la sede UNL a la que pertenezcas (en el caso de que hayas seleccionado una al momento de realizar la inscripción) en un plazo no mayor a 20 días.""",1
-88,"""Las Unidades Académicas y sedes de la UNL se distribuyen entre las localidades de Santa Fe, Esperanza y Gálvez.
+88,"El dato de contacto es el siguiente:
 
-<datoSedeReconquista>
-<datoSedeGalvez>
-<datoSedeRafaela>""",1
+<datoSedeReconquista>",1
 89,"""Las propuestas de UNLVirtual se estructuran a partir de sus propios calendarios académicos, en los cuales se establecen las fechas de inicio y fin de cursado de cada asignatura o módulo. Mirá el instructivo para consultarlo:
 <link_calendarioAcademico>""",1
 90,"""Dentro del Campus, encontrarás el acceso a las Aulas Virtuales destinadas para el cursado de cada una de las materias que corresponden a una carrera en particular. Al ingresar en ellas te encontrarás con todos los recursos que el docente a cargo de esa materia cree necesarios para llevar a cabo el cursado. Estos recursos no tendrán un soporte material -cuadernillos, cd's u otros-, sino que serán digitales: puede ser bibliografía en formato .pdf, prezi, galería de imágenes, videos, entre otros tipos de recursos.""",1
@@ -204,7 +198,15 @@ Walter Sotil) o el Coordinador de Carrera (Sebastián Teitelman) solicitando dic
 103,"""hola""",3
 104,"""chau""",4
 105,"""si, recorda que soy un conjunto de 1's y 0's""",8
-106,"""no entendi lo que dijiste, proba preguntarlo de otra forma""",5
-107,"""error administrativo""",6
-108,"""error academico""",7
-109,"""Hola, soy el chatbot de UNLVirtual. ¿Qué puedo hacer por vos hoy?""",9
+106,"Los Ciclos de Licenciatura tienen una duración de 2 años y medio.",1
+107,"Los Cursos de Formación Profesional tienen una duración de 5 a 10 meses.",1
+108,"Las Tecnicaturas tienen una duración de entre 2 años y medio y 3.",1
+109,"Los Cursos de Posgrado tienen una duración de entre 3 y 5 meses.",1
+110,"El dato de contacto es el siguiente: <datoSedeGalvez>",1
+111,"El dato de contacto es el siguiente: <datoSedeRafaela>",1
+112,"""no entendi lo que dijiste, proba preguntarlo de otra forma""",5
+113,"""error administrativo""",6
+114,"""error academico""",7
+115,"""Hola, soy el chatbot de UNLVirtual. ¿Qué puedo hacer por vos hoy?""",9
+
+
