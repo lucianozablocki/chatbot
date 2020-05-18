@@ -4,7 +4,7 @@ from nltk.corpus import stopwords
 import sklearn
 filename = './SVC_stem.sav'
 path_ans = './respuestas - respuestas.csv'
-path_adjMat = './new_adjMat.csv'
+path_adjMat = './adjMat.csv'
 # path_quest = './preprocessedQuestions_stem_completadas.csv'
 path_placeholders =  './placeholders.csv'
 path_bow = "./bow_w_stopwords.sav"
