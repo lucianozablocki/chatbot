@@ -12,6 +12,7 @@ cantidadRespuestas = respMat.shape[0]
 academicas = []
 administrativas = []
 saludo = []
+nodoChat = []
 # print(respMat)
 for i in range(cantidadRespuestas):
     if respMat[i,2] == 1: #Tipo administrativa
@@ -36,10 +37,7 @@ for i in range(cantidadRespuestas):
         nodoErrorAca = respMat[i,0]    
 
     elif respMat[i,2] == 8:
-        nodoChat = respMat[i,0]
-    
-    elif respMat[i,2] == 10:
-        nodoTime = respMat[i,0]
+        nodoChat.append(respMat[i,0])
 
 
 # print(academicas)
@@ -53,7 +51,7 @@ for i in range (len(academicas)):
     adjMat[academicas[i],academicas[i]] = 0 #Para que no pueda volver a emitir la misma respuesta
     adjMat[academicas[i],nodoErrorAca] = 1 
     adjMat[academicas[i],nodoBye] = 1
-    adjMat[academicas[i],nodoTime] = 1
+    adjMat[academicas[i],nodoChat] = 1
 
 for i in range (len(administrativas)):
 
@@ -61,15 +59,15 @@ for i in range (len(administrativas)):
     adjMat[administrativas[i],administrativas[i]] = 0 #Para que no pueda volver a emitir la misma respuesta
     adjMat[administrativas[i],nodoErrorAdm] = 1
     adjMat[administrativas[i],nodoBye] = 1    
-    adjMat[administrativas[i],nodoTime] = 1
-    
+    adjMat[administrativas[i],nodoChat] = 1
+
 # print(adjMat[11,:])
 # print(adjMat[11,:])
 # print(adjMat[102,:])
 
 #Flujo del saludo
 adjMat[nodoSaludo,nodoError] = 1
-adjMat[nodoSaludo,nodoChat] = 1
+adjMat[nodoSaludo,nodoChat[:]] = 1
 adjMat[nodoSaludo,academicas] = 1
 adjMat[nodoSaludo,administrativas] = 1
 adjMat[nodoSaludo,nodoBye] = 1
@@ -77,18 +75,19 @@ adjMat[nodoSaludo,nodoBye] = 1
 #Flujo del error
 adjMat[nodoError,academicas] = 1
 adjMat[nodoError,administrativas] = 1
-adjMat[nodoError,nodoChat] = 1
+adjMat[nodoError,nodoChat[:]] = 1
 adjMat[nodoError,nodoError] = 1
 adjMat[nodoError,nodoBye] = 1
 
 #Flujo de despedirse: se deja todo 0
 
 #Flujo de las interacciones desestructuradas
-adjMat[nodoChat,nodoChat] = 1
-adjMat[nodoChat,nodoError] = 1
-adjMat[nodoChat,nodoBye] = 1
-adjMat[nodoChat,academicas] = 1
-adjMat[nodoChat,administrativas] = 1
+for i in range(len(nodoChat)):
+    adjMat[nodoChat[i],nodoChat] = 1
+    adjMat[nodoChat[i],nodoError] = 1
+    adjMat[nodoChat[i],nodoBye] = 1
+    adjMat[nodoChat[i],academicas] = 1
+    adjMat[nodoChat[i],administrativas] = 1
 
 #Flujo del error Academico
 adjMat[nodoErrorAca,nodoErrorAca] = 1
