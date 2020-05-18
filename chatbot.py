@@ -29,6 +29,8 @@ keys = placeholders[:,0]
 values = placeholders[:,1]
 replacements = dict(zip(keys,values))
 
+f = open ("registro.txt", "w")
+
 def preprocesar(sentence):
     # print(f"preprocesar method, input its: {sentence}")
     i = quitarStopwordsinput(sentence.split()) #we are using whitespaces as separator, potential problem
@@ -60,10 +62,12 @@ while(True):
     for placeholder in replacements:
         R[actual_node][1] = R[actual_node][1].replace(f'<{placeholder}>', replacements[placeholder])
     print(R[actual_node][1])
+    f.write(R[actual_node][1] + "\n")
     if(actual_node==106):
         print(datetime.datetime.now().strftime("%H:%M:%S")) 
-
+        f.write(datetime.datetime.now().strftime("%H:%M:%S") + "\n")
     i = input()
+    f.write(i + "\n")
     pre_input = preprocesar(i)
     print("input after preproc: ", pre_input)
     model_input = bow_unigram.transform([pre_input])
