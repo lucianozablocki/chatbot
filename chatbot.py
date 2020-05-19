@@ -90,10 +90,6 @@ while(True):
             print("Por favor, decime con que sede te queres contactar")
             sede = input()
             actual_node = obtenerNodo(sede)
-        elif actual_node == 97 or actual_node == 37:
-            print("Por favor, ingresa el contexto al cual pertenece tu pregunta (academico o administrativo)")
-            contexto = input()
-            actual_node = 37 if contexto == "administrativo" else 97
     elif R[actual_node][2] == 1: #administrative error
         actual_node = 114
     elif R[actual_node][2] == 2: #academic error
