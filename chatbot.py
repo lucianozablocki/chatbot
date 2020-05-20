@@ -1,4 +1,4 @@
-import sys, pandas as pd, pickle, numpy as np, preprocesamiento,bow
+import sys, pandas as pd, pickle, numpy as np, preprocesamiento
 from preprocesamiento import quitarStopwordsinput,limpiarSignosinput,AutocorrectorInput,Stemmizarinput
 from nltk.corpus import stopwords
 import sklearn
@@ -6,9 +6,9 @@ import datetime
 
 class Chatbot:
     def __init__(self):
-        path_ans = './respuestas - time.csv'
-        path_adjMat = './adjMat_time.csv'
-        path_placeholders =  './placeholders.csv'
+        path_ans = './csv_files/respuestas - time.csv'
+        path_adjMat = './csv_files/adjMat_time.csv'
+        path_placeholders =  './csv_files/placeholders.csv'
         filename = './SVC_stem_time.sav'
         path_bow = "./bow_w_stopwords_time.sav"
         registro = "./registro.txt"
