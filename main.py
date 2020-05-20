@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def get_response():
-    user_input = request.form["input"]
-    return jsonify({"output": chatbot_instance.getResponse(user_input)})
+    user_input = request.form
+    return jsonify(chatbot_instance.getResponse(user_input))
 
 if __name__ == "__main__":
     chatbot_instance = Chatbot()

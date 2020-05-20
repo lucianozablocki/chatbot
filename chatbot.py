@@ -32,6 +32,8 @@ class Chatbot:
         self.replacements = dict(zip(self.keys,self.values))
 
         self.f = open (registro, "w")
+
+        self.user_data = {}
     
     def preprocesar(self, sentence):
         # print(f"preprocesar method, input its: {sentence}")
@@ -45,7 +47,7 @@ class Chatbot:
         i = Stemmizarinput(i)
         return i.strip()
 
-    def obtenerNodo(self, case):
+    def get_node(self, case):
         switcher = {
             "bachiller" : 69,
             "licenciatura" : 107,
@@ -58,11 +60,40 @@ class Chatbot:
         }
 
         return switcher.get(case, 114) #default->error adm
+    
+    def fill_write_response(self):
+        chatbot_response = self.R[self.actual_node][1]
+        for placeholder in self.replacements:
+            chatbot_response = chatbot_response.replace(f'<{placeholder}>', self.replacements[placeholder])
+        # print(self.R[self.actual_node][1])
+        self.f.write("chatbot :" + chatbot_response + "\n")
+        
+        if(self.actual_node==106):
+            # print(datetime.datetime.now().strftime("%H:%M:%S")) 
+            self.f.write(datetime.datetime.now().strftime("%H:%M:%S") + "\n")
+            chatbot_response = chatbot_response + datetime.datetime.now().strftime("%H:%M:%S")
+        self.f.flush()
+        return chatbot_response
 
-    def getResponse(self, user_input):
+    def getResponse(self, input):
+        if (input["contains_variable"] == "True"):
+            # print("contains_variable")
+            self.f.write("user: " + input["input"] + "\n")
+            self.actual_node = self.get_node(input["input"])
+            # print("actual node:", self.actual_node)
+            # print("input:", input["input"])
+            self.user_data[input["variable_name"]] = input["input"] 
+            # print(self.user_data)
+            chatbot_response = self.fill_write_response()
+            return {
+                "output": chatbot_response,
+                "contains_variable": False,
+                "variable_name": None
+            }
+
         previous_answer_type = self.R[self.actual_node][2]
-        self.f.write("user: " + user_input + "\n")
-        pre_input = self.preprocesar(user_input)
+        self.f.write("user: " + input["input"] + "\n")
+        pre_input = self.preprocesar(input["input"])
         # print("input after preproc: ", pre_input)
         model_input = self.bow_unigram.transform([pre_input])
         probs = self.loaded_model.predict_proba(model_input)
@@ -76,14 +107,24 @@ class Chatbot:
                 probs_flux = probs*self.adjMat[self.actual_node][0:107]
             next_node = np.argmax(probs_flux)
             self.actual_node = next_node
-            # if self.actual_node == 69:
-            #     print("Por favor, decime que carrera queres estudiar")
-            #     carrera = input()
-            #     self.actual_node = obtenerNodo(carrera)
-            # elif self.actual_node == 88:
-            #     print("Por favor, decime con que sede te queres contactar")
-            #     sede = input()
-            #     self.actual_node = obtenerNodo(sede)
+            if self.actual_node == 69 and self.user_data.get("career_type") is None:
+                chatbot_response = "Por favor, decime que carrera queres estudiar"
+                self.f.write("chatbot :" + chatbot_response + "\n")
+                self.f.flush()
+                return {
+                    "output": chatbot_response,
+                    "contains_variable": True,
+                    "variable_name": "career_type"
+                }
+            elif self.actual_node == 88 and self.user_data.get("city") is None:
+                chatbot_response = "Por favor, decime con que sede te queres contactar"
+                self.f.write("chatbot :" + chatbot_response + "\n")
+                self.f.flush()
+                return {
+                    "output": chatbot_response,
+                    "contains_variable": True,
+                    "variable_name": "city"
+                }
         elif previous_answer_type == 1: #administrative error
             self.actual_node = 114
         elif previous_answer_type == 2: #academic error
@@ -92,15 +133,10 @@ class Chatbot:
             self.actual_node = 113
         
         print(f"actual node is: {self.actual_node}")
-        chatbot_response = self.R[self.actual_node][1]
-        for placeholder in self.replacements:
-            chatbot_response = chatbot_response.replace(f'<{placeholder}>', self.replacements[placeholder])
-        # print(self.R[self.actual_node][1])
-        self.f.write("chatbot :" + chatbot_response + "\n")
-        
-        if(self.actual_node==106):
-            # print(datetime.datetime.now().strftime("%H:%M:%S")) 
-            self.f.write(datetime.datetime.now().strftime("%H:%M:%S") + "\n")
-            chatbot_response = chatbot_response + datetime.datetime.now().strftime("%H:%M:%S")
-        self.f.flush()
-        return chatbot_response
+        chatbot_response = self.fill_write_response()
+
+        return {
+            "output": chatbot_response,
+            "contains_variable": False,
+            "variable_name": None
+        }
