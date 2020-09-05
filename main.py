@@ -7,7 +7,7 @@ app = Flask(__name__)
 def get_response():
     if request.method == 'POST':        
         user_input = request.get_json()
-        return jsonify(chatbot_instance.getResponse(user_input))
+        return jsonify(chatbot_instance.get_response(user_input))
 
 if __name__ == "__main__":
     chatbot_instance = Chatbot()

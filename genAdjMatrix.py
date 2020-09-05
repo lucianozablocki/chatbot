@@ -4,7 +4,7 @@ import sys
 #nodosAcad = range()
 n = 116 #n -> cantidad de respuestas
 adjMat = np.zeros((n,n))
-resp = pn.read_csv('./respuestas - time.csv',header=None)
+resp = pn.read_csv('./csv_files/respuestas - time.csv',header=None)
 respMat = resp.values
 #print(respMat)
 cantidadRespuestas = respMat.shape[0]
@@ -52,6 +52,7 @@ for i in range (len(academicas)):
     adjMat[academicas[i],nodoErrorAca] = 1 
     adjMat[academicas[i],nodoBye] = 1
     adjMat[academicas[i],nodoChat] = 1
+    adjMat[academicas[i],administrativas] = 1
 
 for i in range (len(administrativas)):
 
@@ -60,6 +61,7 @@ for i in range (len(administrativas)):
     adjMat[administrativas[i],nodoErrorAdm] = 1
     adjMat[administrativas[i],nodoBye] = 1    
     adjMat[administrativas[i],nodoChat] = 1
+    adjMat[administrativas[i],academicas] = 1
 
 # print(adjMat[11,:])
 # print(adjMat[11,:])

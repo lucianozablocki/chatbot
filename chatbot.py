@@ -6,12 +6,12 @@ import datetime
 
 class Chatbot:
     def __init__(self):
-        path_ans = './csv_files/respuestas - time.csv'
-        path_adjMat = './csv_files/adjMat_time.csv'
-        path_placeholders =  './csv_files/placeholders.csv'
-        filename = './SVC_stem_time.sav'
-        path_bow = "./bow_w_stopwords_time.sav"
-        registro = "./registro.txt"
+        path_ans = './csv_files/respuestas - time.csv' # csv file containing the answers that the chatbot must return, ordered by node
+        path_adjMat = './csv_files/adjMat_time_cambiocontexto.csv' # adjacency matrix (1 in N,M if the chatbot can navigate from N node to M node, otherwise 0)
+        path_placeholders =  './csv_files/placeholders.csv' # information that can change over time, such as contact numbers, addresses
+        filename = './SVC_stem_time.sav' # .sav file with trained IA model, opened with pickle
+        path_bow = "./bow_w_stopwords_time.sav" # bow used to transform user input in a vector that the model can understand
+        registro = "./registro.txt" # file in which the interaction is recorded
 
         R_pd = pd.read_csv(path_ans,delimiter=',',header=None)
         adjMat_pd = pd.read_csv(path_adjMat,delimiter=',',header=None)
@@ -34,6 +34,14 @@ class Chatbot:
         self.f = open (registro, "w")
 
         self.user_data = {}
+
+    def str_to_bool(self, s):
+        if s == "true":
+            return True
+        elif s == "false":
+            return False
+        else:
+            raise ValueError("Cannot covert {} to a bool".format(s))
     
     def preprocesar(self, sentence):
         # print(f"preprocesar method, input its: {sentence}")
@@ -59,7 +67,7 @@ class Chatbot:
             "rafaela": 112
         }
 
-        return switcher.get(case, 114) #default->error adm
+        return switcher.get(case.lower(), 114) #default->error adm
     
     def fill_write_response(self):
         chatbot_response = self.R[self.actual_node][1]
@@ -75,15 +83,12 @@ class Chatbot:
         self.f.flush()
         return chatbot_response
 
-    def getResponse(self, input):
-        if (input["contains_variable"] == "True"):
-            # print("contains_variable")
+    def get_response(self, input):
+        if (self.str_to_bool(input["contains_variable"].lower())):
             self.f.write("user: " + input["input"] + "\n")
             self.actual_node = self.get_node(input["input"])
-            # print("actual node:", self.actual_node)
-            # print("input:", input["input"])
             self.user_data[input["variable_name"]] = input["input"] 
-            # print(self.user_data)
+
             chatbot_response = self.fill_write_response()
             return {
                 "output": chatbot_response,
@@ -94,10 +99,9 @@ class Chatbot:
         previous_answer_type = self.R[self.actual_node][2]
         self.f.write("user: " + input["input"] + "\n")
         pre_input = self.preprocesar(input["input"])
-        # print("input after preproc: ", pre_input)
+
         model_input = self.bow_unigram.transform([pre_input])
         probs = self.loaded_model.predict_proba(model_input)
-        # print(f"max prob is {np.max(probs)}")
         print(f"predicted node is {np.argmax(probs)}")
         
         if(any(x > self.thres for x in probs[0])):
@@ -107,24 +111,30 @@ class Chatbot:
                 probs_flux = probs*self.adjMat[self.actual_node][0:107]
             next_node = np.argmax(probs_flux)
             self.actual_node = next_node
-            if self.actual_node == 69 and self.user_data.get("career_type") is None:
-                chatbot_response = "Por favor, decime que carrera queres estudiar"
-                self.f.write("chatbot :" + chatbot_response + "\n")
-                self.f.flush()
-                return {
-                    "output": chatbot_response,
-                    "contains_variable": True,
-                    "variable_name": "career_type"
-                }
-            elif self.actual_node == 88 and self.user_data.get("city") is None:
-                chatbot_response = "Por favor, decime con que sede te queres contactar"
-                self.f.write("chatbot :" + chatbot_response + "\n")
-                self.f.flush()
-                return {
-                    "output": chatbot_response,
-                    "contains_variable": True,
-                    "variable_name": "city"
-                }
+            if self.actual_node == 69:
+                if self.user_data.get("career_type") is None: # student's career has not been loaded yet
+                    chatbot_response = "Por favor, decime que carrera queres estudiar"
+                    self.f.write("chatbot :" + chatbot_response + "\n")
+                    self.f.flush()
+                    return {
+                        "output": chatbot_response,
+                        "contains_variable": True,
+                        "variable_name": "career_type"
+                    }
+                else: # student's career is known
+                    self.actual_node = self.get_node(self.user_data.get("career_type"))
+            elif self.actual_node == 88:
+                if self.user_data.get("city") is None: # student's city has not been loadded yet
+                    chatbot_response = "Por favor, decime con que sede te queres contactar"
+                    self.f.write("chatbot :" + chatbot_response + "\n")
+                    self.f.flush()
+                    return {
+                        "output": chatbot_response,
+                        "contains_variable": True,
+                        "variable_name": "city"
+                    }
+                else: # student's city is known
+                    self.actual_node = self.get_node(self.user_data.get("city"))
         elif previous_answer_type == 1: #administrative error
             self.actual_node = 114
         elif previous_answer_type == 2: #academic error
