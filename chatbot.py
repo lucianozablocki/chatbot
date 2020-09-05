@@ -81,7 +81,18 @@ class Chatbot:
             self.f.write(datetime.datetime.now().strftime("%H:%M:%S") + "\n")
             chatbot_response = chatbot_response + datetime.datetime.now().strftime("%H:%M:%S")
         self.f.flush()
-        return chatbot_response
+
+        return chatbot_response.\
+            replace("á","a").\
+            replace("é","e").\
+            replace("í","i").\
+            replace("ó","o").\
+            replace("ú","u").\
+            replace("Á","A").\
+            replace("É","E").\
+            replace("Í","I").\
+            replace("Ó","O").\
+            replace("Ú","U")
 
     def get_response(self, input):
         if (self.str_to_bool(input["contains_variable"].lower())):
