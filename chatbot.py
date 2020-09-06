@@ -23,7 +23,7 @@ class Chatbot:
         self.loaded_model = pickle.load(open(filename, 'rb'))
         self.bow_unigram = pickle.load(open(path_bow, 'rb'))
 
-        self.thres = 0.01
+        self.thres = 0.03054759
         self.actual_node = 116
 
         self.stoplist = stopwords.words('spanish')
@@ -114,6 +114,7 @@ class Chatbot:
         model_input = self.bow_unigram.transform([pre_input])
         probs = self.loaded_model.predict_proba(model_input)
         print(f"predicted node is {np.argmax(probs)}")
+        print(f"with probability of {max(max(probs))}")
         
         if(any(x > self.thres for x in probs[0])):
             if self.actual_node == 116:
