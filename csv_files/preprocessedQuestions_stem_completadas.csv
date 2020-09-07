@@ -1,0 +1,1527 @@
+0,` olvid dat `` 
+0,` recuper dat `` 
+0,` pued acced campus virtual dic usuari val `` 
+0,` acuerd contraseñ `` 
+0,` recuerd contraseñ `` 
+0,` recuerd pass `` 
+0,` cambi contraseñ `` 
+0,` cambi `` 
+0,` perdi contraseñ `` 
+0,` olvid contraseñ `` 
+0,` quier recuper contraseñ `` 
+0,` hag recuper contraseñ `` 
+0,` pued usar ambient atencion estudi `` 
+0,` olvid dat `` 
+0,com pued cambi contraseñ 
+0,com recuper contraseñ 
+1,` usuari val `` 
+1,` aparec usuari val `` 
+1,` sal usuari val `` 
+1,` problem usuari `` 
+1,` recuerd usuari `` 
+1,` perdi usuari `` 
+1,` usuari val `` 
+1,` usuari `` 
+1,` usuari `` 
+1,` usuari `` 
+1,` nombr usuari `` 
+1,` usuari inval `` 
+1,` recib usuari val `` 
+1,` perdi nombr usuari `` 
+2,` pued ver element formulari inscripcion `` 
+2,` pued ver element campus `` 
+2,` problem naveg `` 
+2,` formulari inscripcion ve mal `` 
+2,` campus ve mal `` 
+2,` naveg uso `` 
+2,` tip naveg pued usar `` 
+2,` sirv chrom acced campus `` 
+2,` sirv firefly naveg portal virtual `` 
+2,` version naveg uso `` 
+2,` no pued ver element formulari registr `` 
+2,` formulari registr ve mal `` 
+3,` viv argentin carrer pued estudi 
+3,` extranjer viv argentin `` 
+3,` res argentin `` 
+3,` ofert academi exist si extranjer `` 
+3,` res argentin `` 
+3,` actual argentin `` 
+3,` ciudadan argentin `` 
+3,` pose domicili argentin `` 
+3,` hag estudi si extranjer `` 
+3,` soy extranjer viv pais pued estudi unlvirtual `` 
+3,` no viv argentin `` 
+3,` viv argentin `` 
+3,` no direccion argentin `` 
+3,` com estudi si extranjer `` 
+4,` extranjer viv argentin `` 
+4,` hac curs si afuer viv argentin `` 
+4,` intercambi argentin pued curs `` 
+4,` pued estudi distanci si encuentr realiz intercambi `` 
+4,` pued inscrib < carrer > si extranjer viv argentin `` 
+4,` carrer pued estudi si ingier argentin `` 
+4,` ofert academi exist si extranjer viv argentin `` 
+4,` carrer pued estudi si viv argentin extranjer `` 
+4,` viv argentin extranjer `` 
+4,` viv argentin pais `` 
+4,` que hac estudi si extranjer viv argentin `` 
+4,` pued estudi distanci si encuentr hac intercambi `` 
+4,` que carrer pued estudi si indign argentin `` 
+4,` viv argentin extranjer `` 
+5,` argentin res afuer pued estudi `` 
+5,` quier estudi distanci pais `` 
+5,` necesit estudi < carrer > si encuentr pais `` 
+5,` argentin quier estudi < carrer > `` 
+5,` argentin res extranjer necesit inscrib `` 
+5,` hag estudi distanci si viv pais `` 
+5,` argentin viv extranjer `` 
+5,` ciudadan argentin actual viv exterior `` 
+5,` ofert academi si viv argentin argentin `` 
+5,` soy argentin viv afuer pued estudi `` 
+5,` necesit estudi < carrer > si pais `` 
+5,` soy argentin viv extranjer necesit registr `` 
+5,` com estudi distanci si viv pais `` 
+5,` soy ciudadan argentin actual viv extranjer `` 
+6,` pued ver cupon pag `` 
+6,` quier pag sal `` 
+6,` aparec moment pag `` 
+6,` pued entrar campus error ventan emergent `` 
+6,` veo comunicacion institucional `` 
+6,` da error ver cupon pag `` 
+6,` pued acced aul bloqu ventan emergent `` 
+6,` desbloque ventan emergent `` 
+6,` desbloque pop up `` 
+6,` pued habil ventan emergent `` 
+6,` quier pag obteng `` 
+6,` nad aparec moment pag `` 
+6,` no pued ingres campus deb error ventan emergent `` 
+6,` recib error ver cupon pag `` 
+6,` no pued acced aul ventan emergent bloqu `` 
+7,` doy baj inscripcion `` 
+7,` borr carrer `` 
+7,` quier darm baj carrer `` 
+7,` quier elimin inscripcion `` 
+7,` dese elimin inscripcion carrer `` 
+7,` hag dar baj inscripcion `` 
+7,` elimin inscripcion `` 
+7,` pued darm baj carrer `` 
+7,` pued elimin inscripcion `` 
+7,` dar baj inscripcion `` 
+7,` com doy baj `` 
+7,` com elimin carrer `` 
+7,` quier elimin registr `` 
+7,` quier elimin inscripcion carrer `` 
+7,` com elimin registr `` 
+7,` dars baj `` 
+8,` carrer pued estudi `` 
+8,` ofert academi exist `` 
+8,` carrer dict distanci `` 
+8,` cual carrer dispon `` 
+8,` dese estudi distanci `` 
+8,` quier sab propuest estudi dispon `` 
+8,` ofert educacion distanci `` 
+8,` tip carrer exist distanci `` 
+8,` pued conoc propuest existent `` 
+8,` ofert academi actual `` 
+8,` pued estudi distanci `` 
+8,` que carrer enseñ distanci `` 
+8,` que carrer dispon `` 
+8,` quier estudi distanci `` 
+9,` dese estudi < carrer > `` 
+9,` quier empez carrer < carrer > `` 
+9,` inscrib < carrer > `` 
+9,` carrer < carrer > dentr ofert `` 
+9,` pued estudi < carrer > distanci `` 
+9,` tramit inscripcion < carrer > `` 
+9,` quis inscrib < carrer > `` 
+9,` hag anot < carrer > `` 
+9,` quier inscrib < carrer > hag `` 
+9,` interes < carrer > `` 
+9,` pued curs < carrer > `` 
+9,` pued hac < carrer > distanci `` 
+9,` quier curs carrer un `` 
+9,` permit curs < carrer > maner remot `` 
+9,` exist modal distanci < carrer > `` 
+9,` campus < carrer > `` 
+9,` inscrib < carrer > distanci `` 
+9,` pued curs < carrer > unlvirtual `` 
+9,` dispon modal distanci < carrer > `` 
+9,` quier comenz carrer < carrer > `` 
+9,` pued estudi < carrer > distanci `` 
+9,` com proces registr < carrer > `` 
+9,` me gustari registr < carrer > `` 
+9,` quier inscrib < carrer > com hag `` 
+9,` mod remot < carrer > `` 
+9,` dispon mod remot < carrer > `` 
+10,` realic pag credit modul gestion financ . `` 
+10,` pag aparec gestion financ `` 
+10,` realic pag cuot figur `` 
+10,` pag credit `` 
+10,` pag aparec acredit `` 
+10,` cuant deb esper aceit pag `` 
+10,` cuant tard acredit pag `` 
+10,` pag cupon aparec pag `` 
+10,` cuant tiemp pas pag figur acredit 
+10,` cuant esper pag figur pagin `` 
+10,` pag acredit `` 
+10,` cuant tiemp tard acredit pag `` 
+10,` cuant tiemp tard aceit pag `` 
+11,` cual competent tecnicatur diseñ program videojueg `` 
+11,` sal laboral tecnicatur diseñ program videojueg `` 
+11,` pued hac gradu tecnicatur diseñ program videojueg `` 
+11,` cual competent tecnic diseñ program videojueg `` 
+11,` competent brind tecnicatur videojueg `` 
+11,` validez titul tecnicatur diseñ program videojueg `` 
+11,` titul tecnicatur videojueg `` 
+11,` titul obteng gradu tecnicatur diseñ program videojueg `` 
+11,` validez titul tecnicatur videojueg `` 
+11,` reconoc titul tecnicatur diseñ program videojueg `` 
+11,` que pued hac egres tecnicatur diseñ program videojueg `` 
+11,` cual habil tecnic diseñ program videojueg `` 
+12,` que validez titul carrer `` 
+12,` el titul validez provincial nacional `` 
+12,` que reconoc titul `` 
+12,` que validez titul otorg `` 
+12,` el titul sirv pais `` 
+12,` tien mism valor titul otorg carrer presencial `` 
+12,` el titul sirv present cualqui provinci `` 
+12,` que territori abarc reconoc titul `` 
+12,` titul dan sirv pais `` 
+12,` titul carrer distanci presencial val mism `` 
+12,` se pued valid exterior `` 
+12,tien mism valor titul otorg carrer car car 
+12,pued ser ali extranjer 
+13,` veo plan estudi < carrer > `` 
+13,` necesit plan estudi carrer `` 
+13,` hag ver materi < carrer > `` 
+13,` cual materi < carrer > `` 
+13,` plan materi < carrer > `` 
+13,` acced plan estudi `` 
+13,` quier ver plan carrer distanci `` 
+13,` dond encuentr plan estudi < carrer > `` 
+13,` materi < carrer > `` 
+13,` asignatur cur < carrer > `` 
+13,` plan licenciatur `` 
+13,veo curriculum < carrer > 
+13,necesit curriculum profesional 
+13,com veo tem < carrer > 
+13,cual tem < carrer > 
+13,asignatur < carrer > 
+13,dond plan estudi 
+14,` quier sab si licenciatur `` 
+14,` fui admit carrer licenciatur `` 
+14,` necesit confirm si qued < carrer > `` 
+14,` determin si licenciatur `` 
+14,` con habl sab si licenciatur `` 
+14,` necesit confirm si qued licenciatur `` 
+14,` quier sab si admit licenciatur `` 
+14,` qued licenciatur `` 
+14,` quier sab admit licenciatur `` 
+14,` aprob solicitud curs licenciatur `` 
+14,fui admit licenciatur 
+15,` pued cualqu estudi licenciatur `` 
+15,` titul necesit estudi licenciatur `` 
+15,` alcanz titul secundari estudi licenciatur `` 
+15,` nivel titul necesit inscrib licenciatur `` 
+15,` carrer estudi ser licenci `` 
+15,` termin escuel pued estudi licenciatur `` 
+15,` pued inscrib licenciatur `` 
+15,` pued estudi licenciatur `` 
+15,` pued ser admit licenciatur titul `` 
+15,` titul necesit estudi licenciatur `` 
+15,que grad necesit estudi titul 
+15,que nivel grad necesit inscrib licenciatur 
+16,` tard inscrib `` 
+16,` tiemp inscrib `` 
+16,` tiemp complet inscripcion `` 
+16,` fech abiert inscripcion `` 
+16,` cuant tiemp inscrib `` 
+16,` fech termin inscripcion `` 
+16,` dia cierr inscripcion `` 
+16,` cierr inscripcion `` 
+16,` tiemp inscrib `` 
+16,` cerr inscripcion `` 
+16,` quier inscrib tiemp `` 
+16,fech finaliz registr 
+16,que dia cierr registr 
+16,cierr registr 
+16,teng tiemp complet registr 
+16,es tard inscrib 
+17,no inscrib que hag 
+17,pued inscrib fech 
+17,dond inscrib fech 
+17,hay algun formulari inscripcion fech 
+17,dond encuentr dat entreg sed 
+17,` lleg inscrib hag `` 
+17,` formulari inscripcion tard `` 
+17,excepcion fech registr 
+17,` excepcion fech inscripcion `` 
+17,` inscripcion termin `` 
+17,` acced formulari inscripcion fech `` 
+17,` complet formulari inscripcion excepcional `` 
+17,hay registr plaz 
+17,com complet formulari registr excepcional 
+18,` quier habl tutor `` 
+18,` hag habl tutor `` 
+18,` contact tutor `` 
+18,` necesit ayud campus `` 
+18,` contact `` 
+18,` ayud tutor `` 
+18,` veo respuest tutor `` 
+18,` acced ambient `` 
+18,` acced ambient `` 
+18,` lleg ambient atencion estudi `` 
+18,` pued usar ambient comunicacion institucional `` 
+18,` funcion tutor sistem `` 
+18,` contact tutor sistem `` 
+18,com contact tutor sistem 
+18,dond acced entorn 
+18,com acced entorn 
+18,com ayud tutor 
+18,com habl tutor 
+19,` trat titul `` 
+19,` necesit titul . hag `` 
+19,` necesit tramit titul `` 
+19,` com otorg titul `` 
+19,` busc titul `` 
+19,` pid titul `` 
+19,` certific libr deud certif titul `` 
+19,` consig titul `` 
+19,` voy comenz tramit titul `` 
+19,` regres carrer hag `` 
+19,` aprob tod materi com consig titul `` 
+19,` que tramit realiz solicit titul `` 
+19,me gradu carrer que hag 
+19,aprob tod asignatur com obteng titul 
+19,que proced hac solicit titul 
+19,com obteng titul 
+20,` a hor rind examen tecnicatur diseñ program videojueg `` 
+20,` horari examen `` 
+20,` hor rind final `` 
+20,` hor exam final tecnicatur videojueg `` 
+20,` horari examen tecnicatur `` 
+20,` hor ir rend exam final tecnicatur videojueg `` 
+20,` horari rend final `` 
+20,` hor tom examen final tecnicatur `` 
+20,` horari rind exam tecnicatur videojueg `` 
+20,` hor comienz examen `` 
+20,a hor realiz examen tecnicatur diseñ program videojueg 
+20,hor examen 
+20,com horari dar final 
+20,cual hor inici examen 
+21,` moment pued entrar aul `` 
+21,` horari pued consult aul `` 
+21,` moment dìa habilit aul `` 
+21,` hor pued acced aul `` 
+21,` cual horari pued entrar aul virtual `` 
+21,` hor pued ingres aul virtual `` 
+21,` abiert aul `` 
+21,` hor abre aul `` 
+21,` aul estan siempr dispon `` 
+21,` hor pued entrar aul `` 
+21,a hor pued consult aul 
+22,` dict curs extension distanci `` 
+22,` realiz curs extension modal virtual `` 
+22,` cons curs extension `` 
+22,` ofrec curs extension `` 
+22,` exist propuest estudi curs extension distanci `` 
+22,` moment pued inscrib curs extension `` 
+22,` moment pued inscrib curs extension `` 
+22,` pued estudi curs extension un `` 
+22,` curs extension `` 
+22,` period inscripcion curs extension `` 
+22,se import curs extension distanci 
+22,los curs extension import mod virtual 
+22,hay algun propuest estudi curs extension distanci 
+22,pued estudi curs extension un 
+23,` cuant turn exam pued rend `` 
+23,` cuant tiemp dur regular asignatur `` 
+23,` cuant dur regular `` 
+23,` cuant tiemp regul `` 
+23,` cuant llam dur regular `` 
+23,` cuant vec pued rend qued libr `` 
+23,` limit tiemp regular `` 
+23,` cuant tiemp regul `` 
+23,` cuant dur regular < materi > `` 
+23,` cuant tiemp dur ser regul `` 
+24,` cons cur < carrer > `` 
+24,` cur materi < carrer > `` 
+24,` curs < carrer > `` 
+24,` curs < carrer > distanci `` 
+24,` curs carrer distanci `` 
+24,` hac curs distanci `` 
+24,` cur < carrer > total virtual `` 
+24,` exist instanci presencial < carrer > `` 
+24,` curs < carrer > `` 
+24,` ir curs < carrer > `` 
+24,` pued curs < carrer > maner complet virtual `` 
+24,` tan virtual cur < carrer > `` 
+24,` < carrer > total remot `` 
+24,` ir cm curs < carrer > `` 
+24,` virtual tod carrer cm `` 
+24,` quier estudi < carrer > distanci `` 
+24,` exist instanci presencial < carrer > `` 
+24,` instanci presencial < carrer > `` 
+24,` ir personal algun motiv curs < carrer > `` 
+24,` cuant vec asist person cur < carrer > `` 
+24,quier estudi < carrer > distanci 
+24,hay instanci car car < carrer > 
+24,com instanci car car < carrer > 
+24,teng ir personal algun razon estudi < carrer > 
+24,pued estudi < carrer > maner complet virtual 
+25,` envi certific asistent exam domicili tecnicatur diseñ program videojueg `` 
+25,` pued recib certific asistent cas `` 
+25,` mand certific asistent exam tecnicatur videojueg domicili `` 
+25,` olvid ped certific rend materi tecnicatur pued mand domicili `` 
+25,` necesit solicit envi certific asistent exam materi tecnicatur `` 
+25,` pued envi certific asistent final cas `` 
+25,` pas si pedi certific asistent rend `` 
+25,` pued mand certific exam mail `` 
+25,` necesit envi certific asistent domicili `` 
+25,` posibl ped certific asistent via mail `` 
+25,pued envi certific exam corre 
+25,necesit envi certific asistent cas 
+25,posibl solicit certific asistent corre 
+25,me envi certific asistent exam videojueg cas 
+26,` hag qued regul `` 
+26,` promocion materi `` 
+26,` regulariz `` 
+26,` com obteng regular asignatur `` 
+26,` alcanz condicion regul `` 
+26,` pued rend regular `` 
+26,` pued promocion `` 
+26,` com promuev materi `` 
+26,` regular materi `` 
+26,` pued rend final libr `` 
+26,` pued rend libr `` 
+26,com lleg condicion regul 
+27,` carrer materi promocion direct `` 
+27,` pued promocion rend exam `` 
+27,` unid academi distal carrer promocion direct `` 
+27,` carrer promocion direct `` 
+27,` carrer necesit exam presencial `` 
+27,` carrer cuent exam presencial `` 
+27,` hay algun carrer examen presencial `` 
+27,` carrer total virtual `` 
+27,` cual carrer instanci presencial `` 
+27,` carrer ir rend `` 
+27,pued promocion hac exam 
+27,en unid academi carrer distanci promocion direct 
+27,carrer exam car car 
+27,carrer instanci car car 
+28,` cuant sal matricul `` 
+28,` cuant sal cuot `` 
+28,` cuant cuest estudi `` 
+28,` conoc cost materi `` 
+28,` hag ver cost materi `` 
+28,` preci materi `` 
+28,` preci cad carrer `` 
+28,` pued ver preci carrer `` 
+28,` pued encontr cost materi `` 
+28,` encuentr cost materi `` 
+28,` part pagin estan cost `` 
+28,` part portal veo preci `` 
+28,` encuentr cost carrer quier estudi `` 
+28,` avanc mensual diferent propuest `` 
+28,cuant cuest registr 
+28,cuant cuot 
+28,cual tarif mensual diferent propuest 
+29,` pag `` 
+29,` habil pag `` 
+29,` abon `` 
+29,` acced pag `` 
+29,` hag pag materi `` 
+29,` pag materi `` 
+29,` habil cur `` 
+29,` pag cur asignatur `` 
+29,` pag pod curs `` 
+29,` pag habilit curs `` 
+29,` pued rend pag `` 
+29,` com abon carrer distanci `` 
+29,com habit curs 
+29,com pag curs 
+30,` abre inscripcion `` 
+30,` inscrib `` 
+30,` dia inscrib carrer `` 
+30,` period inscripcion `` 
+30,` tramit deb realiz inscrib `` 
+30,` hac inscrib `` 
+30,` inscrib < carrer > `` 
+30,` present document `` 
+30,` present papel `` 
+30,` hag tramit `` 
+30,` hag inscrib `` 
+30,` fech inscripcion `` 
+30,` inscrib carrer distanci dentr modal unlvirtual `` 
+30,` present inscrib `` 
+30,` ya complet formulari inscripcion onlin envi document `` 
+30,` inscripcion cur `` 
+30,` medi realiz inscripcion < carrer > `` 
+30,cuand registr 
+30,period registr 
+30,que hac aplic 
+30,dond hag papele 
+30,fech registr 
+30,que present registr 
+30,inscripcion curs 
+30,por medi registr < carrer > 
+31,` obteng cambi modal `` 
+31,` consig constanci document archiv `` 
+31,` cambi modal `` 
+31,` cual requisit realiz solicitud especial `` 
+31,` realiz solicitud especial `` 
+31,` formulari fug `` 
+31,` obteng solicitud especial `` 
+31,` tramitacion cas especial `` 
+31,` obteng constanci document archiv `` 
+31,` acced formulari unific administracion alumn `` 
+31,com consig cambi mod 
+31,com obteng prueb document archiv 
+31,com proces cas especial 
+31,com obteng prueb document archiv 
+32,` secundari complet pued inscrib `` 
+32,` años pued inscrib `` 
+32,` cons inscripcion baj articul 7 `` 
+32,` cons inscripcion si termin secundari `` 
+32,` termin escuel pued inscrib `` 
+32,` document entreg acced solicitud especial `` 
+32,` no pose titul secundari experient laboral . pued inscrib carrer unlvirtual `` 
+32,` titul secundari pued estudi distanci `` 
+32,` necesari secundari complet inscrib `` 
+32,` pued empez estudi si ded materi secundari `` 
+32,cual inscripcion virtud articul 7 
+32,cons registr si secundari termin 
+32,que document deb present acced solicitud especial 
+32,requier secundari complet inscrib 
+32,pued comenz estudi si deb asignatur secundari 
+33,` pid excepcion curs ingres `` 
+33,` except curs articul `` 
+33,` pued hac curs inicial `` 
+33,` carrer curs introductori `` 
+33,` hac curs introductori `` 
+33,` pid excepcion curs introductori `` 
+33,` < carrer > curs articul `` 
+33,` cual curs introductori `` 
+33,` tod carrer curs articul `` 
+33,` curs ingres exist `` 
+33,com solicit excepcion curs ingres 
+33,com solicit excepcion curs introductori 
+34,` pued bes `` 
+34,` exist algun tip bec `` 
+34,` pag `` 
+34,` algun ayud econom `` 
+34,` necesit bec `` 
+34,` hag acced bec `` 
+34,` pued consegu bec `` 
+34,` hag pag cuot `` 
+34,` modal distanci pag `` 
+34,` pag inscrib `` 
+34,` pued financi estudi `` 
+34,com acced bec 
+34,pued obten bec 
+34,hay algun ayud financ 
+34,algun tip bec 
+35,` par lleg pagin principal usuari necesit usuari contraseñ `` 
+35,` acced pagin `` 
+35,` envi dat acces pagin `` 
+35,` hag ten acces campus virtual `` 
+35,` entro un virtual `` 
+35,` compuest usuari `` 
+35,` acced campus `` 
+35,` cuant tiemp acced ambient `` 
+35,` acces aul `` 
+35,` cuant demor darm acces ambient `` 
+35,` mail mand dat acces `` 
+35,` mand usuari contraseñ `` 
+35,` ingres campus virtual un `` 
+35,` acced ambient `` 
+35,` entro ambient atencion aspir `` 
+35,` estan dat acces campus `` 
+35,` cuant esper entrar campus `` 
+35,` ambient `` 
+35,` acced atencion aspir `` 
+35,` habl tutor ambient `` 
+35,` ambient atencion estudi `` 
+35,` ingres ambient atencion aspir `` 
+35,` ambient atencion aspir `` 
+35,cuant tiemp tard darm acces entorn 
+35,corre envi dat acces 
+35,dond envi nombr usuari contraseñ 
+35,par acced pagin inici usuari necesit nombr usuari contraseñ 
+36,` pag cupon gast ser admit `` 
+36,` deb abon cupon gast administr inscrib `` 
+36,` cuant vec deb pag cupon gast administr `` 
+36,` cuant vec pag cupon gast administr `` 
+36,` habil pag cupon gast administr `` 
+36,` teng abon cupon gast administr `` 
+36,` hast esper abon cupon `` 
+36,` pag cupon gast pued curs `` 
+36,` sirv pag cupon gast `` 
+36,` abon cupon gast administr `` 
+36,` es obligatori abon cupon gast administr complet admision propuest `` 
+36,` pag cupon entrar carrer `` 
+36,` requisit pag cupon gast administr `` 
+36,` cuant vec pag cupon gast administr `` 
+36,` cupon gast administr `` 
+36,` pag cupon gast administr `` 
+36,` comprend cupon gast administr `` 
+36,teng pag cupon gast administr 
+36,hast cuand esper pag cupon 
+36,de sirv pag cupon gast 
+36,requier pag cupon gast administr 
+36,deb pag cupon gast administr registr 
+37,` homolog materi `` 
+37,` hag homolog materi `` 
+37,` pued homolog materi `` 
+37,` moment present solicitud homologacion `` 
+37,` present homologacion `` 
+37,` habl homolog materi `` 
+37,` asesor homologacion `` 
+37,` estudi sirv homolog materi `` 
+37,` pued homolog materi nivel terciari `` 
+37,` materi pued homolog `` 
+37,` es posibl homolog materi aprob univers `` 
+37,` y homolog materi carrer afin `` 
+37,es posibl aprob asignatur aprob univers 
+37,y homolog sujet carrer relacion 
+38,` certif copi `` 
+38,` pued envi fotocopi `` 
+38,` admit fotocopi document `` 
+38,` acept copi document `` 
+38,` sol acept document original `` 
+38,` certif fotocopi `` 
+38,` certif copi `` 
+38,` certif copi titul `` 
+38,` certif fotocopi titul `` 
+38,` < local > necesit certific document `` 
+38,` hag certific fotocopi titul `` 
+38,acept fotocopi document 
+39,` cons curs ingres `` 
+39,` exist curs ingres `` 
+39,` cual curs ingres `` 
+39,` ingres curs hac `` 
+39,` dan curs ingres `` 
+39,` curs ingres presencial `` 
+39,` curs ingres rind final `` 
+39,` rend exam curs ingres `` 
+39,` pud rend curs ingres dict nuev `` 
+39,` pued record curs ingres `` 
+39,` tem dan curs ingres `` 
+39,` que curs ingres deb realiz comenz curs carrer escogi `` 
+39,` curs ingres necesit curs < carrer > `` 
+39,teng hac exam curs ingres 
+40,` retoñ estudi `` 
+40,` inscrib año academ `` 
+40,` habil formulari sur 2 `` 
+40,` figur alumn activ hag `` 
+40,` aparezc activ siu hag `` 
+40,` aparec alumn activ guard hac `` 
+40,` public fech reinscripcion cur `` 
+40,` fij habil reinscripcion cur `` 
+40,` fech reinscripcion `` 
+40,` inscrib < materi > `` 
+40,` curs dej . com retoñ carrer `` 
+40,com reanud estudi 
+40,com vuelv inscrib año academ 
+40,formul sur 2 habilit 
+40,com doy cuent reinscripcion curs habilit 
+40,com vuelv inscrib < materi > 
+41,` reinscribi aparec aul `` 
+41,` reinscribi dej curs `` 
+41,` complet formulari sur 2 año pas `` 
+41,` año pas curs `` 
+41,` año pas curs pued inscrib `` 
+41,` hag alumn activ `` 
+41,` conviert activ guard `` 
+41,` reinscribi habil cur `` 
+41,` aparezc alumn activ `` 
+41,` quier retom carrer ingres campus virtual un nombr usuari contraseñ visualiz ambient comunicacion institucional pued realiz ningun tip operacion `` 
+41,el año pas asist pued registr 
+41,com conviert estudi activ 
+41,com hag activ guard 
+41,ya inscrit aul aparec 
+42,` un virtual `` 
+42,` campus virtual `` 
+42,` sirv portal un virtual `` 
+42,` pued hac campus `` 
+42,` sirv campus virtual `` 
+42,` pued autogestion tramit `` 
+42,` funcion campus virtual `` 
+42,` unlvirtual `` 
+42,` permit hac portal virtual `` 
+42,` llam portal virtual `` 
+42,par campus virtual 
+43,` funcion sed `` 
+43,` sirv sed un `` 
+43,` < local > present papel `` 
+43,` < local > present document `` 
+43,` viv < local > llev papel `` 
+43,` algun sed < local > `` 
+43,` inscrib si < local > `` 
+43,` examen rind sed `` 
+43,` pued curs sed `` 
+43,` pued inscrib sed un `` 
+43,examen dan sed 
+44,` inscrib ser docent `` 
+44,` hag ser docent virtual `` 
+44,` quier ser docent distanci `` 
+44,` inscrib ser docent distanci `` 
+44,` inter dar clas distanci `` 
+44,` quier enseñ un virtual `` 
+44,` comun ser docent virtual `` 
+44,` exist algun concurs ser docent `` 
+44,` concurs ser docent `` 
+44,` hac enseñ aul virtual `` 
+44,` quier trabaj docent `` 
+44,quier trabaj maestr 
+44,hay concurs ser maestr 
+44,cuand concurs ser maestr 
+44,quier ser maestr distanci 
+44,inscrib ser maestr distanci 
+44,me interes aprendizaj distanci 
+44,com inscrib ser maestr 
+45,` quier estudi idiom `` 
+45,` estudi < idiom > `` 
+45,` estudi < idiom > `` 
+45,` hag anot clas idiom `` 
+45,` quier estudi < idiom > `` 
+45,` centr idiom `` 
+45,` cuant sal estudi idiom `` 
+45,` preci sal estudi < idiom > `` 
+45,` empiez curs < idiom > `` 
+45,` pued estudi idiom un virtual `` 
+45,com inscrib clas idiom 
+46,< sitioajen > 
+46,< sitioajen > 
+46,< sitioajen > 
+46,< sitioajen > 
+46,< sitioajen > 
+46,< sitioajen > 
+46,< sitioajen > 
+46,< sitioajen > 
+46,< sitioajen > 
+46,< sitioajen > 
+47,< curs adul/apul > 
+47,` anot curs azul `` 
+47,` anot curs paul `` 
+47,` inscrib curs adul/apul `` 
+47,` habl realiz curs azul `` 
+47,` contact hac curs paul `` 
+47,` anot cicl formacion azul `` 
+47,` inscrib cicl formacion paul `` 
+47,` curs azul gratis `` 
+47,` gratuit curs adul/apul `` 
+47,` pag curs paul `` 
+48,` quier estudi distanci res sta fe capital `` 
+48,` pued estudi carrer mism ciud `` 
+48,` pued estudi distanci si viv sant fe `` 
+48,` si viv sta fe pued estudi < carrer > `` 
+48,` posibl estudi < carrer > si viv mism ciud `` 
+48,` pued estudi carrer distanci viv sant fe `` 
+48,` pued estudi distanci si sant fe `` 
+48,` viv sant fe pued ingres modal distanci `` 
+48,` res sant fe pued estudi unlvirtual `` 
+48,` sant fe pued estudi distanci `` 
+48,quier estudi distanci viv sant fe capital 
+49,` aspir carrer distanci año ingres anterior admit deb inscrib nuev carrer `` 
+49,` inscrib nuev si año pas admit `` 
+49,` rechaz año anterior inscrib `` 
+49,` admit carrer distanci año pas hac `` 
+49,` figur admit necesari reinscripcion `` 
+49,` acept < carrer > hag `` 
+49,` admit año pas inscrib `` 
+49,` inscripcion admit `` 
+49,` entreg document plaz año pas volv inscrib `` 
+49,` realiz nuev inscripcion si rechaz año pas `` 
+49,teng inscrib nuev si admit año pas 
+49,teng hac nuev registr si rechaz año pas 
+50,` aparec usuari registr `` 
+50,` dej acced formulari inscripcion registr `` 
+50,` quier volv inscrib dic registr `` 
+50,` quier inscrib < carrer > registr `` 
+50,` cuand abro formulari inscripcion coloc numer dni recib advertent indic usuari registr `` 
+50,` dic usuari registr `` 
+50,` habi inscript carrer deb obten usuari contraseñ nuev `` 
+50,` da advertent usuari registr intent inscrib `` 
+50,` cre nuev usuari si habi inscript carrer `` 
+50,` advertent quier inscrib `` 
+50,permit acced formulari registr registr 
+50,quier registr nuev dic registr 
+50,por advertent quier registr 
+51,` pued estudi abogac distanci `` 
+51,` exist modal distanci derech `` 
+51,` alumn carrer abogac univers nacional litoral dese continu estudi modal distanci . que tramit deb inici `` 
+51,` pued cambi modal carrer abogac `` 
+51,` cur bachill derech fans pued cambi modal `` 
+51,` pued estudi bachill cienci jurid social distanci `` 
+51,` pued continu carrer abogac distanci `` 
+51,` quier segu estudi abogac distanci `` 
+51,` cambi modal cur carrer derech `` 
+51,` pued termin abogac distanci `` 
+52,` que document acredit ser admit alumn carrer inscrib `` 
+52,` document present inscrib `` 
+52,` present ser admit alumn < carrer > `` 
+52,` papel present ser admit unlvirtual `` 
+52,` document necesit inscrib carrer distanci `` 
+52,` papel acredit admit `` 
+52,` document requer admision < carrer > `` 
+52,` cual papel pid inscripcion `` 
+52,` papel necesit estudi < carrer > `` 
+52,` quier estudi < carrer > document present `` 
+52,document requier admision < carrer > 
+52,papel pid inscripcion 
+52,que document deb present ser admit unlvirtual 
+52,que document deb present registr 
+53,` titul necesari admision `` 
+53,` necesit titul inscripcion `` 
+53,` necesit titul secundari anot < carrer > `` 
+53,` titul necesit estudi < carrer > `` 
+53,` acredit necesit ser admit < carrer > `` 
+53,` tip titul pid entrar < carrer > `` 
+53,` que tip titul necesit ser admit propuest `` 
+53,` fij titul deb present inscripcion `` 
+53,` requisit necesit realiz inscripcion < carrer > `` 
+53,` tip titul requier estudi carrer `` 
+53,que tip titul pid ingres < carrer > 
+53,requisit necesari realiz registr < carrer > 
+53,se requier titul registr 
+54,` pued anot si titul secundari tramit `` 
+54,` titul secundari tramit `` 
+54,` pued estudi < carrer > si todavi titul secundari `` 
+54,` quier curs < carrer > dieron titul `` 
+54,` titul tramit pued estudi igual `` 
+54,` document present si titul tramit `` 
+54,` pued empez estudi titul secundari tramit `` 
+54,` reci termin escuel pued estudi `` 
+54,` pued present constanci titul secundari tramit `` 
+54,` pued empez curs < carrer > si secundari tramit `` 
+54,mi titul pendient pued estudi 
+54,que document present si titul pendient 
+54,pued comenz estudi titul secundari proces 
+54,acab termin escuel pued estudi 
+55,` pued estudi licenciatur si titul tramit `` 
+55,` todavi titul terciari pued estudi licenciatur `` 
+55,` titul tramit pued estudi licenciatur igual `` 
+55,` quier estudi licenciatur todavi terciari `` 
+55,` titul terciari tramit pued estudi licenciatur igual `` 
+55,` pued comenz curs cicl licenciatur si titul terciari tramit `` 
+55,` titul terciari tramit `` 
+55,` pued estudi licenciatur titul `` 
+55,` necesari titul terciari inici licenciatur `` 
+55,` quer estudi licenciatur necesit titul `` 
+55,pued comenz tom licenciatur si titul terciari pendient 
+55,titul terciari pendient 
+55,se requier titul terciari comenz licenciatur 
+56,` quier estudi posgr titul tramit `` 
+56,` pued realiz curs posgr si titul universitari tramit `` 
+56,` titul universitari tramit `` 
+56,` pued estudi posgr titul `` 
+56,` necesari titul universitari inici posgr `` 
+56,` quer estudi posgr necesit titul `` 
+56,` quer curs posgr titul necesit `` 
+56,` pued anot posgr si titul universitari tramit `` 
+56,` hag estudi posgr titul tramit `` 
+56,` recibi titul todavi pued estudi posgr `` 
+56,quier estudi postgr titul pendient 
+56,pued tom curs posgr si titul universitari pendient 
+56,titul universitari proces 
+56,se requier titul universitari comenz posgr 
+56,quier tom curs posgr necesit titul 
+56,pued inscrib postgr si titul universitari proces 
+56,recibi aun titul pued estudi postgr 
+57,` me inscrib vari carrer . teng envi jueg document cad `` 
+57,` anot dos carrer cuant vec present papel `` 
+57,` deb present document separ carrer `` 
+57,` present document repet carrer `` 
+57,` mand document cad vez inscrib carrer `` 
+57,` si quier estudi dos carrer present papel dos vec `` 
+57,` quier curs 2 carrer llev 2 vec document `` 
+57,` inscrib mas carrer present document vari vec `` 
+57,` si inscrib carrer deb present papel nuev `` 
+57,` quier estudi vari carrer present vari vec document `` 
+57,document deb present separ carrer 
+57,teng envi document cad vez inscrib carrer 
+57,si inscrib carrer deb envi document nuev 
+58,` alumn un document deb present inscrib distanci `` 
+58,` fui alumn carrer univers nacional litoral inscrib carrer distanci . deb envi nuev document ser admit nuev propuest `` 
+58,` si alumn un present nuev papel inscripcion modal distanci `` 
+58,` si alumn modal presencial volv present document `` 
+58,` necesari envi document si alumn carrer presencial un `` 
+58,` inscript carrer un papel necesit inscrib distanci `` 
+58,` alumn un papel envi inscripcion carrer distanci `` 
+58,` document present un sirv modal distanci `` 
+58,` curs un present vez document `` 
+58,` alumn un volv present papel `` 
+58,si estudi un present nuev document registr mod distanci 
+58,si estudi mod presencial volv envi document 
+58,es necesari envi document si estudi carrer presencial un 
+58,soy estudi un document deb envi inscripcion carrer distanci 
+58,soy estudi univers volv envi document 
+59,` envi document quier sab si lleg com `` 
+59,` mand papel pued sab si lleg com `` 
+59,` pued fij document `` 
+59,` pued sab si document admit `` 
+59,` part pagin encuentr document `` 
+59,` lleg papel `` 
+59,` quier sab si papel recib `` 
+59,` entro fij si acept papel `` 
+59,` pued conoc si document bien `` 
+59,` pued sab inscripcion `` 
+59,ya envi papel com pued sab si lleg com 
+59,dond pued verific document 
+59,quier sab si recib papel 
+59,a dond voy ver si document acept 
+59,com pued sab si document bien 
+60,` funcion coordin academ `` 
+60,` contact coordin academ `` 
+60,` quier habl coordin academ `` 
+60,` hag habl coordin academ `` 
+60,` contact coordin academ `` 
+60,` ayud coordin academ `` 
+60,` funcion coordin tecnic `` 
+60,` hac tutor carrer `` 
+60,` veo respuest coordin academ `` 
+60,` coordin academ `` 
+60,` contact coordin tecnic `` 
+60,` comun tutor carrer `` 
+60,com comun coordin academ 
+60,com habl coordin academ 
+60,com ayud coordin academ 
+60,com comun coordin tecnic 
+61,` funcion docent `` 
+61,` contact docent `` 
+61,` quier habl docent `` 
+61,` contact docent `` 
+61,` ayud docent `` 
+61,` hag comunic docent `` 
+61,` veo respuest docent `` 
+61,` hag habl docent `` 
+61,` hac docent `` 
+61,` cons trabaj docent `` 
+61,cual papel maestr 
+61,com comun maestr 
+61,quier habl profesor 
+61,contact maestr 
+61,com ayud maestr 
+61,veo respuest profesor 
+61,com habl maestr 
+61,que hac profesor 
+61,cual trabaj maestr 
+62,` hag si recib respuest docent `` 
+62,` contest nadi < carrer > `` 
+62,` recib respuest nadi < carrer > `` 
+62,` estudi < carrer > nadi respond consult `` 
+62,` docent respond `` 
+62,` hag si docent contest `` 
+62,` comuniqu docent recibi respuest `` 
+62,` docent contest `` 
+62,` comun si obteng respuest docent `` 
+62,` docent < carrer > respond `` 
+62,estudi < carrer > nadi respond pregunt 
+62,el profesor respond 
+62,que hag si profesor respond 
+62,me pus contact profesor recibi respuest 
+62,mi maestr respond 
+62,a qui contact si recib respuest maestr 
+62,maestr < carrer > respond 
+62,que hag si recib respuest maestr 
+62,nadi respond < carrer > 
+63,` coordin academ respond consult `` 
+63,` habl si coordin contest `` 
+63,` intent contact coordin recib respuest `` 
+63,` quier habl coordin academ pued `` 
+63,` pued comunic coordin academ `` 
+63,` coordin respond `` 
+63,` hag si coordin contest `` 
+63,` comuniqu coordin academ recibi respuest `` 
+63,` coordin academ contest `` 
+63,` comun si obteng respuest coordin academ `` 
+63,me pus contact coordin academ recibi respuest 
+63,mi coordin academ respond 
+63,a qui contact si recib respuest coordin academ 
+63,con qui habl si coordin respond 
+64,` tutor contest `` 
+64,` tutor sistem respond `` 
+64,` hag si tutor contest `` 
+64,` comuniqu tutor recibi respuest `` 
+64,` comun si obteng respuest tutor `` 
+64,` tutor respond mensaj `` 
+64,` mand mensaj tutor respondi `` 
+64,` no respond tutor sistem . `` 
+64,` quier inici reclam ped respuest `` 
+64,` pued comunic tutor sistem `` 
+64,` quier habl tutor pued `` 
+64,que hag si tutor respond 
+64,me pus contact tutor recibi respuest 
+64,a qui contact si recib respuest tutor 
+64,envi mensaj tutor respondi 
+64,quier inici reclam solicitud respuest 
+64,mi tutor respond 
+65,` cuand comienz curs carrer `` 
+65,` empiez cur < carrer > `` 
+65,` fech comienz cur `` 
+65,` fech inici < carrer > `` 
+65,` consult fech comienz cur `` 
+65,` comienz curs `` 
+65,` fech inici cur `` 
+65,` arranc cur `` 
+65,` period admision carrer `` 
+65,` fech dict cur `` 
+65,com verif fech inici curs 
+65,comienz curs 
+65,fech comienz curs 
+66,` com inscrib curs materi `` 
+66,` quier inscrib materi `` 
+66,` inscrib < materi > `` 
+66,` entrar inscrib < materi > `` 
+66,` inscripcion materi `` 
+66,` medi realiz inscripcion < materi > `` 
+66,` inscripcion `` 
+66,` hag inscrib `` 
+66,` cons inscripcion si ingres `` 
+66,` inscripcion cur `` 
+66,com inscrib < materi > 
+66,dond ir inscrib < materi > 
+66,inscripcion asignatur 
+67,` cual horari cur `` 
+67,` horari curs `` 
+67,` fij horari cur `` 
+67,` horari cur exist `` 
+67,` necesit sab horari < materi > `` 
+67,` curs < materi > `` 
+67,` horari `` 
+67,` cronogram cur `` 
+67,` horari curs `` 
+67,` hor cur `` 
+67,` hor clas `` 
+67,horari curs 
+67,hor asist 
+67,horari curs exist 
+68,` cuant materi cuatrimestr curs `` 
+68,` curs orden `` 
+68,` cantid materi pued curs `` 
+68,` pued eleg cualqui materi curs `` 
+68,` numer materi hac `` 
+68,` pued curs mas materi `` 
+68,` maxim materi pued curs `` 
+68,` minim materi pued curs `` 
+68,` restriccion materi cur `` 
+68,` pued hac vari materi `` 
+68,cuant materi semestr tom 
+68,cuant materi pued tom 
+68,que cantid asignatur hac 
+68,cual numer maxim asignatur pued tom 
+68,pued hac vari asignatur 
+69,` cuant tiemp dur carrer curs elegi `` 
+69,` cuant años dur carrer `` 
+69,` tiemp finaliz carrer `` 
+69,` cuant tiemp dur < carrer > `` 
+69,` tiemp duracion < carrer > `` 
+69,` cuant llev termin < carrer > `` 
+69,` duracion carrer `` 
+69,` cuant dur < carrer > `` 
+69,` duracion plan estudi < carrer > `` 
+69,` cuant años dur < carrer > `` 
+69,cuant tiemp llev termin < carrer > 
+69,cuant dur carrer 
+69,cuant dur carrer 
+70,` se solicit nombr usuari contraseñ ingres aul seccion dentr aul . `` 
+70,` pid usuari pass ingres aul `` 
+70,` sali aul pued logr `` 
+70,` pued logr entrar aul `` 
+70,` necesari logr entrar aul `` 
+70,` pid vuelv logg dentr aul `` 
+70,` pued usar aul pid usuari contraseñ `` 
+70,` pid log entrar aul `` 
+70,` habl si pid dat entrar aul `` 
+70,` pid ingres dat entrar aul `` 
+70,sali aul pued inici sesion 
+70,no pued inici sesion entrar aul 
+70,necesari inici sesion ingres aul 
+70,no pued usar aul pid nombr usuari contraseñ 
+70,porqu pid inici sesion ingres aul 
+70,con qui habl si pid informacion ingres aul 
+71,` estoy habilit curs materi acces aul `` 
+71,` pued entrar aul `` 
+71,` pued ingres aul inscript `` 
+71,` abon cuot pued entrar aul `` 
+71,` pag cuot acces aul `` 
+71,` apto curs pued acced materi `` 
+71,` pued acced aul `` 
+71,` pued acced < materi > `` 
+71,` habil aul < materi > `` 
+71,` habil aul < carrer > `` 
+71,` dispon aul virtual < materi > `` 
+71,no pued entrar aul registr 
+71,ya pag tarif pued ingres aul 
+71,pag tarif acces aul 
+72,` regularic materi const seccion regular sistem siu guard . com pued solucion `` 
+72,` no aparec regular `` 
+72,` no figur regular siu `` 
+72,` no pas regular siu guard `` 
+72,` qued regul pas `` 
+72,` pas condicion siu `` 
+72,` regul < materi > siu `` 
+72,` aparezc regul siu guard `` 
+72,` cuand intent inscrib exam adviert pued hac ten carg regular . ` 
+72,` figur regular siu `` 
+72,no regular siu 
+72,me mantuv regul pas 
+72,no regular siu 
+73,` no pud regular materi . cuand pued volv cur deb apoy nuev ` 
+73,` qued libr < materi > . hag `` 
+73,` si qued libr volv pag `` 
+73,` si desaprueb materi volv pag `` 
+73,` no regularic materi volv cur `` 
+73,` si recurs materi pag nuev `` 
+73,` pued record < materi > `` 
+73,` libr < materi > necesari volv pag `` 
+73,` pued volv curs < materi > `` 
+73,` volv pag record materi `` 
+73,si libr pag nuev 
+74,` soy ingres carrer por pued inscrib cur `` 
+74,` ingres por acces sistem siu guard 
+74,` me inscrib carrer pued entrar siu `` 
+74,` ingres < carrer > pued entrar siu guard `` 
+74,` pued entrar siu si ingres `` 
+74,` inscrib materi prim cuatrimestr prim año < carrer > `` 
+74,` ingres pued entrar siu `` 
+74,` empec < carrer > año acces siu guard `` 
+74,` quier empez curs inscrib `` 
+74,` pued entrar siu guard pued inscrib `` 
+74,me inscrib carrer pued ingres siu `` 
+74,com inscrib asignatur prim cuatrimestr < carrer > 
+74,comenc < carrer > año acces siu guard 
+75,` pued ver cupon pag `` 
+75,` veo pag `` 
+75,` com pued visualiz cupon pag `` 
+75,` acced cupon pag `` 
+75,` aparec factur pag `` 
+75,` veo pag `` 
+75,` obteng factur `` 
+75,` lug portal aparec cuot pag `` 
+75,` veo cuot `` 
+75,` acced cuot pag `` 
+75,` por veo modul gestion financ `` 
+75,com pued ver cupon pag 
+75,factur pag aparec 
+75,com consig factur 
+75,com veo tarif 
+75,com acced tarif pag 
+76,` se venc cuot 1 quier curs asignatur . `` 
+76,` cuot 1 encuentr venc gener nuev cupon pag `` 
+76,` pued curs si venc cuot 1 `` 
+76,` pas si venc cuot 1 `` 
+76,` caduc cuot 1 pued curs `` 
+76,` pud pag cuot 1 venc `` 
+76,` pued pag cuot 1 pas fech `` 
+76,` olvid pag prim cuot `` 
+76,` pas segund vencimient pued abon cuot `` 
+76,` venc prim cuot record asignatur `` 
+76,suced si cuot 1 expir 
+77,` se venc cuot 2 pued imprim . `` 
+77,` gestion pag cuot 2 lueg vencimient `` 
+77,` pued volv imprim segund cuot `` 
+77,` suced si venc cuot 2 `` 
+77,` actualiz fech vencimient cuot 2 `` 
+77,` olvid pag segund cuot `` 
+77,` tiemp abon cuot 2 `` 
+77,` hag si pag cuot 2 tiemp `` 
+77,` fech vencimient cuot 2 pas pued hac `` 
+77,` cuot numer 2 pag venc `` 
+77,com gestion pag tarif 2 despu vencimient 
+77,que pas si cuot 2 expir 
+77,cuot numer 2 pag expir 
+78,` com realiz inscripcion rend exam final `` 
+78,` inscrib exam final `` 
+78,` hag inscrib final `` 
+78,` inscrib exam < materi > `` 
+78,` hac inscrib exam < materi > `` 
+78,` inscrib rend final < materi > `` 
+78,` anot rend final `` 
+78,` anot rend `` 
+78,` inscrib rend exam final `` 
+78,` inscripcion exam final `` 
+78,que deb hac inscrib exam 
+78,dond deb registr exam final 
+79,` final `` 
+79,` rind final `` 
+79,` examen final `` 
+79,` rind final < carrer > `` 
+79,` lug llev cab examen final `` 
+79,` sed final `` 
+79,` lug fisic realiz exam final `` 
+79,` rind < materi > `` 
+79,` rind final < materi > `` 
+79,` rind examen < carrer > `` 
+79,` dond rind examen final carrer cur `` 
+79,lug realiz examen final 
+80,` no pued inscrib rend exam final `` 
+80,` dej inscrib rend exam `` 
+80,` aparec < materi > inscrib final `` 
+80,` quier inscrib final pued `` 
+80,` pued realiz inscripcion llam final `` 
+80,` quier rend final dej inscrib `` 
+80,` problem inscripcion final < materi > `` 
+80,` permit inscripcion exam `` 
+80,` pued anot rend exam final `` 
+80,` pued inscrib exam < materi > `` 
+80,no pued registr tom exam final 
+80,no dej inscrib tom exam 
+80,no veo < materi > inscrib final 
+80,quier dar final dej registr 
+80,teng problem registr final < materi > 
+80,no permit inscrib exam 
+80,no pued inscrib tom exam final 
+81,` es posibl rend vari examen mism turn `` 
+81,` pued inscrib mas final `` 
+81,` quier rend multipl examen turn `` 
+81,` pued rend < materi > < materi > mism turn `` 
+81,` pued rend mas exam turn `` 
+81,` pued rend 2 examen mism llam `` 
+81,` pued anot vari final `` 
+81,` pued inscrib mas exam mism llam `` 
+81,` pued sac 2 materi mism llam `` 
+81,` pued rend sol materi llam `` 
+81,es posibl tom vari examen turn 
+81,pued inscrib final 
+81,quier hac vari examen turn 
+82,` dond pued consult fech examen `` 
+82,` dias turn examen `` 
+82,` fech turn examen `` 
+82,` turn examen `` 
+82,` rind examen `` 
+82,` rind final < materi > `` 
+82,` turn presencial `` 
+82,` llam exam `` 
+82,` aparec fech final `` 
+82,` veo turn exam `` 
+82,` pued present rend `` 
+82,` fech examen `` 
+82,` llam `` 
+82,` inscrib llam `` 
+82,` pued rend `` 
+83,` com pued conoc not exam rend `` 
+83,` veo not exam `` 
+83,` sub not final < materi > `` 
+83,` not exam `` 
+83,` lug carg not exam `` 
+83,` aparec not examen `` 
+83,` hag consult not `` 
+83,` veo result exam `` 
+83,` aparec not exam `` 
+83,` sub not exam < materi > `` 
+83,com pued sab calif exam tom 
+83,com veo calif exam 
+83,com revis not 
+83,com veo result prueb 
+83,no veo calif exam 
+83,dond calif exam 
+83,dond carg calif exam 
+84,` necesit constanci exam present trabaj . com pued obten `` 
+84,` necesit constanci exam `` 
+84,` consig constanci trabaj `` 
+84,` hag obten constanci labur `` 
+84,` necesit constanci trabaj `` 
+84,` pued ped constanci exam `` 
+84,` necesit certific exam firm docent `` 
+84,` falt trabaj exam necesit constanci `` 
+84,` pued ped papel testifiqu rend exam final `` 
+84,` pued obten certific exam final `` 
+84,com obteng certific labur 
+84,pued solicit comprob exam 
+84,necesit certific exam firm profesor 
+85,` com solicit certific alumn regul `` 
+85,` hag consegu certific alumn regul `` 
+85,` pid certific alumn regul `` 
+85,` pid certific alumn regul `` 
+85,` necesit certific alumn regul `` 
+85,` necesit document testifiqu alumn regul < carrer > `` 
+85,` envi certific domicili `` 
+85,` busc certific alumn regul `` 
+85,` pued solicit mas certific alumn regul `` 
+85,` cuant certific alumn regul pued ped `` 
+85,` cuant tard envi certific alumn regul `` 
+85,com obteng certific estudi regul 
+85,dond solicit certific estudi regul 
+85,com solicit certific estudi regul 
+85,cuant certific regular estudi pued solicit 
+85,cuant tiemp tard envi certific estudi regul 
+85,envi certific direccion 
+86,` com solicit certific histori academi `` 
+86,` hag consegu certific histori academi `` 
+86,` pid certific histori academi `` 
+86,` pid certific histori academi `` 
+86,` necesit certific histori academi `` 
+86,` necesit document testifiqu histori academi `` 
+86,` envi certific histori academi domicili `` 
+86,` busc certific histori academi `` 
+86,` pued solicit mas certific histori academi `` 
+86,` cuant tard envi certific histori academi `` 
+86,` cuant certific histori academi pued ped `` 
+86,necesit document testifiqu historial academ 
+86,envi certific histori academi cas 
+86,busc certific histori academi 
+86,pued solicit certific histori academi 
+86,cuant tiemp tard envi certific histori academi 
+86,cuant certific histori academi pued solicit 
+86,com obteng certific histori academi 
+86,solicit certific histori academi 
+86,com solicit certific histori academi 
+87,` com solicit constanci libr deud `` 
+87,` hag consegu constanci libr deud `` 
+87,` pid constanci libr deud `` 
+87,` pid constanci libr deud `` 
+87,` necesit constanci libr deud `` 
+87,` necesit document testifiqu pose deud `` 
+87,` envi constanci libr deud `` 
+87,` busc constanci libr deud `` 
+87,` cuant tard envi constanci libr deud `` 
+87,` necesit certific pag `` 
+87,necesit prueb deud libr 
+87,necesit document testifiqu deud 
+88,` qued < unid academi > 
+88,` com contact < unid academi > `` 
+88,` lleg < unid academi > `` 
+88,` necesit telefon < unid academi > `` 
+88,` pagin < unid academi > `` 
+88,` necesit informacion < unid academi > 
+88,` comun < unid academi > `` 
+88,` tel < unid academi > `` 
+88,` mail < unid academi > `` 
+88,` < unid academi > `` 
+88,` necesit contact < unid academi > `` 
+88,` estan sed un `` 
+88,` cual sed un `` 
+88,` sed `` 
+88,` local estan sed un `` 
+88,` qued sed un `` 
+88,` lugar estan unidad academ `` 
+88,` qued sed `` 
+88,` estan situ sed `` 
+88,< unid academi > 
+88,necesit numer telefon < unid academi > 
+88,cual corre electron < unid academi > 
+89,` calendari academ `` 
+89,` exist calendari academ `` 
+89,` acced calendari academ `` 
+89,` necesit calendari academ `` 
+89,` calendari academ `` 
+89,` dispon calendari academ `` 
+89,` calendari academ año `` 
+89,` establec fech cur `` 
+89,` figur fech llam `` 
+89,` aparec fech inscripcion `` 
+89,calendari academ 
+89,calendari academ dispon 
+90,` encuentr material estudi `` 
+90,` sub diaposit `` 
+90,` encuentr libr `` 
+90,` sub puf `` 
+90,` estan sub puf `` 
+90,` acced puf `` 
+90,` estan sub libr `` 
+90,` sub firm `` 
+90,` consig material estudi `` 
+90,` acced material estudi `` 
+90,sub archiv puf 
+90,carg archiv puf 
+90,com acced archiv puf 
+90,carg libr 
+90,dond material estudi 
+91,` com rind examen final `` 
+91,` cons exam final `` 
+91,` rind final < materi > `` 
+91,` final < materi > presencial `` 
+91,` final presencial `` 
+91,` teng viaj sant fe rend examen final `` 
+91,` ir sed rend final `` 
+91,` ir sant fe pod rend exam final `` 
+91,` rend esencial `` 
+91,` pued rend examen final distanci `` 
+91,` pued rend examen final form remot `` 
+91,` necesari rend final form presencial `` 
+91,pued tom examen final form remot 
+91,es necesari rend final person 
+91,teng ir sant fe hac exam final 
+91,las final car car 
+92,` que pas deb segu habilit aul cur `` 
+92,` hag habilit aul cur `` 
+92,` hac habil aul `` 
+92,` habit aul < materi > `` 
+92,` necesit conoc habil aul `` 
+92,` hac pod acced aul < materi > 
+92,` hac habilit aul < carrer > `` 
+92,` falt pod acced aul `` 
+92,` habil aul cur `` 
+92,` pag pod acced aul `` 
+92,necesit sab com habil aul 
+92,que hac habil aul < carrer > 
+92,necesit acced aul 
+92,no aul curs 
+92,teng pag acced aul 
+92,com habit aul 
+93,` cual medi pag habilit ` 
+93,` medi pag exist `` 
+93,` pued pag < medi pag > `` 
+93,` pued abon tarjet `` 
+93,` pued pag tarjet `` 
+93,` recib credit `` 
+93,` pued realiz deposit `` 
+93,` medi pag `` 
+93,` posibl abon cuot credit `` 
+93,` pued sald cupon deposit `` 
+93,` cancel pag `` 
+93,pued hac deposit 
+93,que metod pag 
+93,posibl pag tarif credit 
+94,` pag carrer materi `` 
+94,` pued pag materi `` 
+94,` pag sol vez inici carrer `` 
+94,` pag comprend tod carrer `` 
+94,` pag cur < materi > `` 
+94,` necesari abon cad asignatur curs `` 
+94,` deb efectu pag materi `` 
+94,` pag cad materi `` 
+94,` cuant vec pag asignatur `` 
+94,` cuant pag pued pag materi `` 
+94,pag inclu tod carrer 
+94,teng pag curs < materi > 
+94,es necesari pag cad materi tom 
+94,pag carrer asignatur 
+95,` pag junt `` 
+95,` plan financi `` 
+95,` pued pag cuot `` 
+95,` necesari abon junt curs `` 
+95,` necesit pag tod cuot curs `` 
+95,` acept pag cuot `` 
+95,` pag deb hac unic cuot `` 
+95,` hac cuot `` 
+95,` cuant cuot pued pag `` 
+95,` plan pag `` 
+96,` com lleg facult tecnicatur diseñ program videojueg `` 
+96,` ubicacion facult dict tecnicatur diseñ program videojueg `` 
+96,` hag lleg finch `` 
+96,` lleg facult ingenieri cienci hidric `` 
+96,` qued finch `` 
+96,` lleg facult carrer `` 
+96,` facult `` 
+96,` facult ingenieri cienci hidric `` 
+96,` voy facult tecnicatur diseñ program videojueg `` 
+96,` lleg finch `` 
+97,` com realiz tramit homologacion materi tecnicatur diseñ program videojueg `` 
+97,` homolog materi tecnicatur diseñ program videojueg `` 
+97,` materi pued homolog tecnicatur diseñ program videojueg `` 
+97,` realiz tramit homologacion tecnicatur diseñ program videojueg `` 
+97,` homolog materi `` 
+97,` hac homolog materi `` 
+97,` realiz homologacion materi `` 
+97,` pued homolog materi tecnicatur diseñ program videojueg `` 
+97,` materi pued homolog `` 
+97,` quier homolog introduccion program `` 
+97,com llev cab homologacion materi videojueg 
+98,` com obteng certific asistent exam materi tecnicatur diseñ program videojueg `` 
+98,` necesit constanci rend exam tecnicatur diseñ program videojueg `` 
+98,` rend exam tecnicatur diseñ program videojueg necesit papel testifiqu `` 
+98,` necesit constanci testifiqu rend exam tecnicatur `` 
+98,` necesit certific asistent final tecnicatur `` 
+98,` quier certific asistent exam tecnicatur diseñ program videojueg `` 
+98,` necesit certific present trabaj rend materi tecnicatur `` 
+98,` otorg certific asistent exam `` 
+98,` obteng certific asistent exam final `` 
+98,` entreg certific asistent exam `` 
+98,` necesit certific trabaj rend exam `` 
+98,` consig papel testifiqu rend `` 
+98,com obteng certific asistent exam asignatur tecnicatur diseñ program videojueg 
+98,necesit prueb hic exam tecnicatur diseñ program videojueg 
+98,necesit certific testifiqu hic exam tecnic 
+99,` que pas si rend materi correl mism fech tecnicatur diseñ program videojueg `` 
+99,` quier rend materi correl `` 
+99,` pued rend materi present correlat `` 
+99,` hag rend materi correl mism llam `` 
+99,` pued rend materi correl mism turn `` 
+99,` quier rend examen materi consecut `` 
+99,` materi correl pued rend ambas `` 
+99,` correlat materi impid rend junt `` 
+99,` posibl rend materi correl mism llam `` 
+99,` rend correl mism turn pued `` 
+99,pued tom asignatur correl mism turn 
+99,quier hac examen asignatur consecut 
+100,` cual materi tecnicatur diseñ program videojueg `` 
+100,` materi dan tecnicatur videojueg `` 
+100,` cual materi cur tecnicatur program jueg `` 
+100,` cuant materi tecnicatur diseñ videojueg `` 
+100,` materi prim año tecnicactur videojueg `` 
+100,` asignatur carrer videojueg `` 
+100,` tem dan carrer tecnicatur videojueg `` 
+100,` materi obligatori carrer videojueg `` 
+100,` curriculum videojueg `` 
+100,` materi pued inscrib curs tecnicatur program diseñ videojueg `` 
+100,que asignatur obligatori carrer videojueg 
+100,curriculum videojueg 
+100,que materi pued inscrib estudi program diseñ videojueg 
+100,asignatur import tecnic videojueg 
+100,materi estudi tecnicatur program jueg 
+100,cuant asignatur diseñ tecnicatur videojueg 
+100,asignatur prim año videojueg tecnicactur 
+100,que asignatur pued aprob tecnic diseñ program videojueg 
+100,que materi pued aprob videojueg 
+101,` cuant optat deb hac tecnicatur diseñ program videojueg `` 
+101,` optat deb curs carrer videojueg `` 
+101,` cual optat aprob hac tecnicatur diseñ program jueg `` 
+101,` cuant efect carrer diseñ videojueg `` 
+101,` curs materi optat program videojueg `` 
+101,` cuant materi optat aprob tecnicatur program videojueg `` 
+101,` curs tod optat plan diseñ videojueg `` 
+101,` cur optat program jueg `` 
+101,` pued curs optat tecnicatur videojueg cualqui moment ` 
+101,` optat tecnicatur diseñ program videojueg correlat `` 
+101,pued tom asignatur optat videojueg cualqui moment 
+101,las asignatur optat diseñ program videojueg correlat 
+101,cuant asignatur optat carrer diseñ videojueg 
+101,teng tom asignatur opcional program videojueg 
+101,cuant asignatur optat deb prob tecnicatur program videojueg 
+101,teng tom tod asignatur optat plan diseñ videojueg 
+101,cuant asignatur optat deb hac diseñ tecnicatur program videojueg 
+101,que asignatur optat deb tom carrer videojueg 
+102,` que tecnolog usan tecnicatur diseñ program videojueg ` 
+102,` cual tecnolog utiliz tecnicatur diseñ videojueg `` 
+102,` lenguaj program usan program videojueg `` 
+102,` libr usan program videojueg `` 
+102,` cual frameworks usan tecnicatur program videojueg `` 
+102,` program usan program carrer videojueg `` 
+102,` usan con tecnicatur diseñ program jueg `` 
+102,` usan tal tecnicatur diseñ program videojueg `` 
+102,` lenguaj program pued aprend tecnicatur diseñ program videojueg `` 
+102,` program diseñ videojueg `` 
+102,bibliotec utiliz program videojueg 
+103,` salud cabot `` 
+103,` salud cabot `` 
+103,` salud cabot `` 
+103,` salud cabot `` 
+103,` salud cabot `` 
+103,` salud cabot `` 
+103,` salud cabot `` 
+103,` salud cabot `` 
+103,` salud cabot `` 
+103,` salud cabot ``  
+104,` graci chau `` 
+104,` graci chau `` 
+104,` graci chau `` 
+104,` graci chau `` 
+104,` graci chau `` 
+104,` graci chau `` 
+104,` graci chau `` 
+104,` graci chau `` 
+104,` graci chau `` 
+104,` graci chau `` 
+105,` sos robot `` 
+105,` sos robot `` 
+105,` sos robot `` 
+105,` sos robot `` 
+105,` sos robot `` 
+105,` sos robot `` 
+105,` sos robot `` 
+105,` sos robot `` 
+105,` sos robot `` 
+105,` sos robot `` 
