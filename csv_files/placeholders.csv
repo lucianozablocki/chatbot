@@ -20,8 +20,7 @@ link_gastosAdministrativos,http://www.unlvirtual.edu.ar/gastos-administrativos/
 direccionCEMED,"San Jerónimo 3231, Santa Fe"
 mediosDePago,"Link, Bica Ágil, Pago Mis cuentas, Todo Pago, Rapi Pago, Banco Nación."
 link_campusVirtualUNL,http://www.unlvirtual.edu.ar/campus-virtual-unl/
-datosDeContactoUNL,"
-TELÉFONO: +54 (0342) 4571110
+datosDeContactoUNL,"TELÉFONOS: +54 (0342) 4571110
 EMAIL: informes@unl.edu.ar
 "
 datosDeContactoCentroIdiomas,"Centro de Idiomas de la UNL
@@ -54,5 +53,5 @@ E-Mail: sede-rs@unl.edu.ar
 "
 AÑO_ACTUAL,2020
 link_calendarioAcademico,https://www.youtube.com/watch?v=yjRqZPo6sVw
-tecnologiasDiseñoProgramacionVideojuegos,Lenguaje C++ Librerías: Godot, SFML, Unity 3D, HTML5, AS3, Flixel, HAXEFlixel, OpenGL GLUT, Java for Android
+tecnologiasDiseñoProgramacionVideojuegos,Lenguaje C++ Librerías SML y SFML Unity 3D HTML5 AS3 Flixel y HAXE Flixel OpenGL y GLUT Java for Android
 programaDiseñoProgramacionVideojuegos,1er año: Introducción a la programación Introducción al diseño de videojuegos Videojuegos y sociedad 2do año: Modelos y algoritmos para videojuegos II Programación de videojuegos I Manipulación de objetos 2D 3er año: Optativa 1 - Prototipado rápido Optativa 2 - Inteligencia artificial para videojuegos Proyecto final de carrera Programación de videojuegos III
